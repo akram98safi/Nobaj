@@ -113,6 +113,9 @@
   "admin_no_operations": "No operations recorded yet.",
   "admin_no_visits": "No visits recorded yet.",
   "admin_database": "Database: {database}",
-  "page_title": "Nobaj Studio",
-  "public_stats_label": "公開利用統計"
+  "page_title": "Nobaj Studio | オンライン動画・音声・GIFツール",
+  "public_stats_label": "公開利用統計",
+  "meta_description": "動画の圧縮、音声の抽出、動画クリップのGIF変換ができる無料オンラインツールです。設定を選んで、処理済みファイルをダウンロードできます。",
+  "og_title": "Nobaj Studio | オンライン動画・音声・GIFツール",
+  "og_description": "動画の圧縮、音声の抽出、動画クリップのGIF変換ができる無料オンラインツールです。設定を選んで、処理済みファイルをダウンロードできます。"
 }

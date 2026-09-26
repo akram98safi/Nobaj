@@ -113,6 +113,9 @@
   "admin_no_operations": "No operations recorded yet.",
   "admin_no_visits": "No visits recorded yet.",
   "admin_database": "Database: {database}",
-  "page_title": "Nobaj Studio",
-  "public_stats_label": "Genel kullan?m istatistikleri"
+  "page_title": "Nobaj Studio | Çevrimiçi Video, Ses ve GIF Araçları",
+  "public_stats_label": "Genel kullan?m istatistikleri",
+  "meta_description": "Videoları sıkıştırmak, sesleri çıkarmak ve video kliplerini GIF'e dönüştürmek için ücretsiz çevrimiçi araçlar. Ayarlarınızı seçin ve işlenen dosyayı indirin.",
+  "og_title": "Nobaj Studio | Çevrimiçi Video, Ses ve GIF Araçları",
+  "og_description": "Videoları sıkıştırmak, sesleri çıkarmak ve video kliplerini GIF'e dönüştürmek için ücretsiz çevrimiçi araçlar. Ayarlarınızı seçin ve işlenen dosyayı indirin."
 }

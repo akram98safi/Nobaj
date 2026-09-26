@@ -113,6 +113,9 @@
   "admin_no_operations": "No operations recorded yet.",
   "admin_no_visits": "No visits recorded yet.",
   "admin_database": "Database: {database}",
-  "page_title": "Nobaj Studio",
-  "public_stats_label": "Public usage statistics"
+  "page_title": "Nobaj Studio | Online Video, Audio & GIF Tools",
+  "public_stats_label": "Public usage statistics",
+  "meta_description": "Free online tools to compress videos, extract audio, and convert video clips to GIF. Choose your settings and download the processed file.",
+  "og_title": "Nobaj Studio | Online Video, Audio & GIF Tools",
+  "og_description": "Free online tools to compress videos, extract audio, and convert video clips to GIF. Choose your settings and download the processed file."
 }

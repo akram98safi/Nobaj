@@ -113,6 +113,9 @@
   "admin_no_operations": "No operations recorded yet.",
   "admin_no_visits": "No visits recorded yet.",
   "admin_database": "Database: {database}",
-  "page_title": "Nobaj Studio",
-  "public_stats_label": "公开使用统计"
+  "page_title": "Nobaj Studio | 在线视频、音频和 GIF 工具",
+  "public_stats_label": "公开使用统计",
+  "meta_description": "免费在线工具，可压缩视频、提取音频并将视频片段转换为 GIF。选择设置并下载处理后的文件。",
+  "og_title": "Nobaj Studio | 在线视频、音频和 GIF 工具",
+  "og_description": "免费在线工具，可压缩视频、提取音频并将视频片段转换为 GIF。选择设置并下载处理后的文件。"
 }

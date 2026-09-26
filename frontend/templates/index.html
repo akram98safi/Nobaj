@@ -1,11 +1,83 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="dark">
+<html lang="{{ page_language }}" dir="{{ 'rtl' if page_language == 'ar' else 'ltr' }}" data-page-language="{{ page_language }}" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-i18n="page_title">Nobaj Studio</title>
+  <title data-i18n="page_title">نُباج — ضغط الفيديو واستخراج الصوت وتحويله إلى GIF</title>
+
+  <!-- SEO Core Meta Tags -->
+  <meta name="description" data-i18n-content="meta_description" content="أدوات مجانية لمعالجة الوسائط عبر الإنترنت: ضغط الفيديو، استخراج الصوت وتحويل الفيديو إلى GIF. اختر إعداداتك وحمّل النتيجة بعد اكتمال المعالجة.">
+  <meta name="author" content="Nobaj Studio">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#8b5cf6">
+  <meta name="color-scheme" content="dark">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  <!-- Language-specific landing pages -->
+  {% for language, url in language_alternates %}
+  <link rel="alternate" hreflang="{{ language }}" href="{{ url }}">
+  {% endfor %}
+
+  <!-- Open Graph (Facebook, LinkedIn, WhatsApp, Telegram) -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nobaj Studio">
+  <meta property="og:title" data-i18n-content="og_title" content="نُباج — ضغط الفيديو واستخراج الصوت وتحويله إلى GIF">
+  <meta property="og:description" data-i18n-content="og_description" content="أدوات مجانية لمعالجة الوسائط عبر الإنترنت: ضغط الفيديو، استخراج الصوت وتحويل الفيديو إلى GIF.">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:image" content="{{ site_url }}/static/img/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Nobaj Studio — Online video and audio tools">
+  <meta property="og:locale" content="{{ open_graph_locale }}">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" data-i18n-content="og_title" content="نُباج — ضغط الفيديو واستخراج الصوت وتحويله إلى GIF">
+  <meta name="twitter:description" data-i18n-content="og_description" content="أدوات مجانية لمعالجة الوسائط عبر الإنترنت: ضغط الفيديو، استخراج الصوت وتحويل الفيديو إلى GIF.">
+  <meta name="twitter:image" content="{{ site_url }}/static/img/og-cover.png">
+
+  <!-- Favicons & Touch Icons -->
   <link rel="icon" href="/static/img/logo.svg" type="image/svg+xml">
-  
+  <link rel="icon" href="/static/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png">
+
+  <!-- DNS Prefetch & Preconnect -->
+  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["WebApplication", "SoftwareApplication"],
+    "name": "Nobaj Studio",
+    "url": "{{ canonical_url }}",
+    "description": "Free online tools for compressing videos, extracting audio, and converting video clips to GIF.",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "Any",
+    "inLanguage": "{{ page_language }}",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "featureList": [
+      "Video compression with adjustable quality and resolution",
+      "Audio extraction with selectable output format and bitrate",
+      "Video to GIF conversion with adjustable frame rate and resolution",
+      "Automatic cleanup of temporary and processed files after {{ file_ttl_minutes }} minutes",
+      "Interface available in 13 languages"
+    ],
+    "creator": {
+      "@type": "Organization",
+      "name": "Nobaj",
+      "url": "{{ site_url }}"
+    }
+  }
+  </script>
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -472,12 +544,19 @@
   </main>
 
   <!-- Studio Footer -->
-  <footer class="border-t border-white/[0.06] bg-[#090a0d] py-6 text-center text-xs text-slate-500 space-y-2">
-    <p class="font-medium" data-i18n="footer_title">Nobaj Media Studio • Server-side FFmpeg Engine</p>
-    <p class="text-[11px] text-slate-600" data-i18n="footer_privacy" data-i18n-ttl="{{ file_ttl_minutes }}">
-      يتم تنظيف وحذف الملفات المؤقتة والنهائية آلياً بعد {{ file_ttl_minutes }} دقيقة لضمان الخصوصية التامة.
-    </p>
+  <footer class="border-t border-white/[0.06] bg-[#090a0d] py-8 text-center text-xs text-slate-500 space-y-4">
+    <div class="max-w-4xl mx-auto px-4 space-y-3">
+      <p class="font-medium" data-i18n="footer_title">Nobaj Media Studio • Server-side FFmpeg Engine</p>
+      <p class="text-[11px] text-slate-600" data-i18n="footer_privacy" data-i18n-ttl="{{ file_ttl_minutes }}">
+        يتم تنظيف وحذف الملفات المؤقتة والنهائية آلياً بعد {{ file_ttl_minutes }} دقيقة لضمان الخصوصية التامة.
+      </p>
+      <p class="text-[10px] text-slate-700">&copy; {{ current_year }} Nobaj.com</p>
+    </div>
   </footer>
+
+  <noscript>
+    <p>فعّل JavaScript لاستخدام أدوات نُباج.</p>
+  </noscript>
 
   <!-- Application JS Bundle -->
   <script src="/static/js/app.js"></script>

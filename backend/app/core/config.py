@@ -18,6 +18,7 @@ class Settings(BaseSettings):
     # General
     APP_NAME: str = "Nobaj"
     APP_DESCRIPTION: str = "Modern High-Performance Online Media Suite"
+    PUBLIC_BASE_URL: str = "https://nobaj.com"
     VERSION: str = "1.0.0"
     DEBUG: bool = False
     ADMIN_TOKEN: str = ""  # Required to access /admin and /api/stats/admin

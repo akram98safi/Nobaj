@@ -113,6 +113,9 @@
   "admin_no_operations": "No operations recorded yet.",
   "admin_no_visits": "No visits recorded yet.",
   "admin_database": "Database: {database}",
-  "page_title": "Nobaj Studio",
-  "public_stats_label": "Estad?sticas de uso p?blicas"
+  "page_title": "Nobaj Studio | Herramientas online de vídeo, audio y GIF",
+  "public_stats_label": "Estad?sticas de uso p?blicas",
+  "meta_description": "Herramientas online gratuitas para comprimir vídeos, extraer audio y convertir clips de vídeo a GIF. Elige la configuración y descarga el archivo procesado.",
+  "og_title": "Nobaj Studio | Herramientas online de vídeo, audio y GIF",
+  "og_description": "Herramientas online gratuitas para comprimir vídeos, extraer audio y convertir clips de vídeo a GIF. Elige la configuración y descarga el archivo procesado."
 }

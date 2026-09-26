@@ -4,9 +4,9 @@
  */
 
 // --- Global State ---
-let currentLang = 'ar';
+let currentLang = document.documentElement.dataset.pageLanguage || 'ar';
 try {
-  currentLang = localStorage.getItem('nobaj_lang') || 'ar';
+  currentLang = document.documentElement.dataset.pageLanguage || localStorage.getItem('nobaj_lang') || 'ar';
 } catch (error) {
   // The app remains usable when browser storage is disabled.
 }
@@ -35,6 +35,12 @@ const languageNames = {
   ja: '日本語',
   ko: '한국어',
   hi: 'हिन्दी'
+};
+
+const openGraphLocales = {
+  ar: 'ar_SA', en: 'en_US', es: 'es_ES', fr: 'fr_FR', de: 'de_DE',
+  pt: 'pt_BR', it: 'it_IT', tr: 'tr_TR', ru: 'ru_RU', zh: 'zh_CN',
+  ja: 'ja_JP', ko: 'ko_KR', hi: 'hi_IN'
 };
 
 async function loadTranslations(lang) {
@@ -73,6 +79,8 @@ function setupLanguage() {
     }
     htmlEl.lang = lang;
     htmlEl.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    const ogLocale = document.querySelector('meta[property="og:locale"]');
+    if (ogLocale) ogLocale.setAttribute('content', openGraphLocales[lang]);
 
     if (currentLanguageEl) currentLanguageEl.textContent = languageNames[lang];
     document.querySelectorAll('.language-option').forEach(option => {
@@ -90,6 +98,12 @@ function setupLanguage() {
         const ttl = el.dataset.i18nTtl || '';
         el.textContent = translations[key].replace('{ttl}', ttl).replace('{size}', el.dataset.i18nSize || '');
       }
+    });
+
+    // Meta tags store translated values in their content attribute, not as text.
+    document.querySelectorAll('[data-i18n-content]').forEach(el => {
+      const value = translations[el.dataset.i18nContent];
+      if (value) el.setAttribute('content', value);
     });
 
     document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
@@ -119,7 +133,15 @@ function setupLanguage() {
   }
 
   document.querySelectorAll('.language-option').forEach(option => {
-    option.addEventListener('click', () => applyLanguage(option.dataset.lang));
+    option.addEventListener('click', () => {
+      const selectedLanguage = option.dataset.lang;
+      try {
+        localStorage.setItem('nobaj_lang', selectedLanguage);
+      } catch (error) {
+        // The language switch still works when browser storage is disabled.
+      }
+      window.location.assign(selectedLanguage === 'ar' ? '/' : `/${selectedLanguage}`);
+    });
   });
 
   document.addEventListener('click', (event) => {

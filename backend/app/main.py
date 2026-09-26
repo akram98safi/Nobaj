@@ -2,10 +2,11 @@
 
 import logging
 from contextlib import asynccontextmanager
+from datetime import datetime
 from pathlib import Path
 
-from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import HTMLResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -25,6 +26,16 @@ logger = logging.getLogger("nobaj")
 FRONTEND_DIR = Path(__file__).resolve().parent.parent.parent / "frontend"
 STATIC_DIR = FRONTEND_DIR / "static"
 TEMPLATES_DIR = FRONTEND_DIR / "templates"
+SUPPORTED_LANGUAGES = ("ar", "en", "es", "fr", "de", "pt", "it", "tr", "ru", "zh", "ja", "ko", "hi")
+OPEN_GRAPH_LOCALES = {
+    "ar": "ar_SA", "en": "en_US", "es": "es_ES", "fr": "fr_FR",
+    "de": "de_DE", "pt": "pt_BR", "it": "it_IT", "tr": "tr_TR",
+    "ru": "ru_RU", "zh": "zh_CN", "ja": "ja_JP", "ko": "ko_KR", "hi": "hi_IN",
+}
+
+
+def language_path(language: str) -> str:
+    return "/" if language == "ar" else f"/{language}"
 
 
 @asynccontextmanager
@@ -84,13 +95,17 @@ app.include_router(api_router)
 @app.get("/", response_class=HTMLResponse)
 async def index_page(request: Request):
     """Render main interactive user interface."""
+    return await render_index_page(request, "ar")
+
+
+async def render_index_page(request: Request, language: str):
     visitor_id = request.cookies.get("nobaj_visitor_id")
     if not visitor_id:
         import uuid
         visitor_id = uuid.uuid4().hex
     analytics.record_visit(
         visitor_id=visitor_id,
-        path="/",
+        path=request.url.path,
         user_agent=request.headers.get("user-agent", ""),
     )
     response = templates.TemplateResponse(
@@ -98,9 +113,18 @@ async def index_page(request: Request):
         "index.html",
         {
             "app_name": settings.APP_NAME,
+            "site_url": settings.PUBLIC_BASE_URL.rstrip("/"),
+            "canonical_url": f"{settings.PUBLIC_BASE_URL.rstrip('/')}{language_path(language)}",
+            "page_language": language,
+            "open_graph_locale": OPEN_GRAPH_LOCALES[language],
+            "language_alternates": [
+                (code, f"{settings.PUBLIC_BASE_URL.rstrip('/')}{language_path(code)}")
+                for code in SUPPORTED_LANGUAGES
+            ],
             "max_upload_size_mb": settings.MAX_UPLOAD_SIZE_MB,
             "max_duration_minutes": settings.MAX_DURATION_SECONDS // 60,
             "file_ttl_minutes": settings.FILE_TTL_MINUTES,
+            "current_year": datetime.now().year,
             "adsense_client": settings.GOOGLE_ADSENSE_CLIENT,
             "adsense_slot_top": settings.GOOGLE_ADSENSE_SLOT_TOP,
             "adsense_slot_bottom": settings.GOOGLE_ADSENSE_SLOT_BOTTOM,
@@ -117,14 +141,58 @@ async def index_page(request: Request):
     return response
 
 
+@app.get("/robots.txt", response_class=PlainTextResponse, include_in_schema=False)
+async def robots_txt():
+    """Publish crawl guidance and point search engines to the XML sitemap."""
+    base_url = settings.PUBLIC_BASE_URL.rstrip("/")
+    return PlainTextResponse(
+        "User-agent: *\n"
+        "Allow: /\n"
+        "Disallow: /api/\n"
+        "Disallow: /health\n"
+        "Disallow: /docs\n"
+        "Disallow: /redoc\n"
+        "Disallow: /openapi.json\n"
+        f"Sitemap: {base_url}/sitemap.xml\n",
+        media_type="text/plain",
+    )
+
+
+@app.get("/sitemap.xml", include_in_schema=False)
+async def sitemap_xml():
+    """Expose each canonical language landing page to search crawlers."""
+    base_url = settings.PUBLIC_BASE_URL.rstrip("/")
+    urls = "".join(
+        f"  <url><loc>{base_url}{language_path(language)}</loc></url>\n"
+        for language in SUPPORTED_LANGUAGES
+    )
+    content = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        f"{urls}"
+        "</urlset>\n"
+    )
+    return PlainTextResponse(content, media_type="application/xml")
+
+
 @app.get("/admin", response_class=HTMLResponse)
 async def admin_page(request: Request):
     """Render the protected dashboard shell; data is loaded with an admin token."""
-    return templates.TemplateResponse(
+    response = templates.TemplateResponse(
         request,
         "admin.html",
         {"app_name": settings.APP_NAME},
     )
+    response.headers["X-Robots-Tag"] = "noindex, nofollow"
+    return response
+
+
+@app.get("/{language}", response_class=HTMLResponse, include_in_schema=False)
+async def localized_index_page(request: Request, language: str):
+    """Render a language-specific, crawlable landing page."""
+    if language not in SUPPORTED_LANGUAGES:
+        raise HTTPException(status_code=404, detail="Page not found")
+    return await render_index_page(request, language)
 
 
 if __name__ == "__main__":

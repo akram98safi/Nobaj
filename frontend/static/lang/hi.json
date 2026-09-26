@@ -113,6 +113,9 @@
   "admin_no_operations": "No operations recorded yet.",
   "admin_no_visits": "No visits recorded yet.",
   "admin_database": "Database: {database}",
-  "page_title": "Nobaj Studio",
-  "public_stats_label": "सार्वजनिक उपयोग के आँकड़े"
+  "page_title": "Nobaj Studio | ऑनलाइन वीडियो, ऑडियो और GIF टूल",
+  "public_stats_label": "सार्वजनिक उपयोग के आँकड़े",
+  "meta_description": "वीडियो संपीड़ित करने, ऑडियो निकालने और वीडियो क्लिप को GIF में बदलने के लिए मुफ़्त ऑनलाइन टूल। सेटिंग चुनें और संसाधित फ़ाइल डाउनलोड करें।",
+  "og_title": "Nobaj Studio | ऑनलाइन वीडियो, ऑडियो और GIF टूल",
+  "og_description": "वीडियो संपीड़ित करने, ऑडियो निकालने और वीडियो क्लिप को GIF में बदलने के लिए मुफ़्त ऑनलाइन टूल। सेटिंग चुनें और संसाधित फ़ाइल डाउनलोड करें।"
 }
