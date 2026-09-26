@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ app_name }} — لوحة الإحصائيات</title>
+  <link rel="icon" href="/static/img/logo.svg" type="image/svg+xml">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="min-h-screen text-slate-100">
+  <header class="site-header">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <a href="/" class="flex items-center gap-2">
+        <img src="/static/img/logo.svg" alt="Nobaj" class="h-9 w-auto">
+      </a>
+      <span class="admin-header-label" data-i18n="admin_title">Analytics Dashboard</span>
+    </div>
+  </header>
+
+  <main class="admin-shell">
+    <section id="admin-login" class="admin-login studio-panel">
+      <span class="section-kicker" data-i18n="admin_private">PRIVATE DASHBOARD</span>
+      <h1 data-i18n="admin_title">Analytics Dashboard</h1>
+      <p data-i18n="admin_description">Enter the admin token to view site and operation statistics.</p>
+      <form id="admin-login-form" class="admin-login-form">
+        <label for="admin-token" data-i18n="admin_token">Admin token</label>
+        <input id="admin-token" type="password" autocomplete="current-password" placeholder="ADMIN_TOKEN">
+        <button type="submit" class="btn-violet w-full py-3 rounded-xl" data-i18n="admin_show_stats">View analytics</button>
+        <div id="admin-error" class="admin-error" role="alert"></div>
+      </form>
+    </section>
+
+    <section id="admin-dashboard" class="hidden space-y-6">
+      <div class="admin-heading">
+        <div>
+          <span class="section-kicker" data-i18n="admin_overview">Nobaj / ANALYTICS</span>
+          <h1>نظرة عامة</h1>
+        </div>
+        <div class="flex gap-2">
+          <button id="admin-refresh" class="btn-ghost px-4 py-2.5 rounded-xl text-sm" data-i18n="admin_refresh">Refresh</button>
+          <button id="admin-logout" class="btn-ghost px-4 py-2.5 rounded-xl text-sm" data-i18n="admin_logout">Log out</button>
+        </div>
+      </div>
+
+      <div class="admin-metric-grid">
+        <div class="admin-metric studio-card"><span data-i18n="admin_total_visitors">Total visitors</span><strong id="admin-total-visitors">0</strong></div>
+        <div class="admin-metric studio-card"><span data-i18n="admin_today_visitors">Visitors today</span><strong id="admin-today-visitors">0</strong></div>
+        <div class="admin-metric studio-card"><span data-i18n="admin_total_operations">Total operations</span><strong id="admin-total-operations">0</strong></div>
+        <div class="admin-metric studio-card"><span data-i18n="admin_completed_operations">Completed operations</span><strong id="admin-completed-operations">0</strong></div>
+      </div>
+
+      <div class="admin-panels">
+        <section class="studio-panel admin-panel">
+          <div class="admin-panel-title"><h2 data-i18n="admin_operation_type">Operations by type</h2><span data-i18n="admin_all_time">All time</span></div>
+          <div id="admin-operation-list" class="admin-bars"></div>
+        </section>
+        <section class="studio-panel admin-panel">
+          <div class="admin-panel-title"><h2 data-i18n="admin_daily_visits">Daily visits</h2><span data-i18n="admin_last_30_days">Last 30 days</span></div>
+          <div class="admin-table-wrap">
+            <table>
+              <thead><tr><th data-i18n="admin_day">Day</th><th data-i18n="admin_visitors">Visitors</th><th data-i18n="admin_unique_visitors">Unique</th></tr></thead>
+              <tbody id="admin-daily-visits"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+      <p id="admin-status" class="admin-status"></p>
+    </section>
+  </main>
+
+  <script src="/static/js/admin.js"></script>
+</body>
+</html>

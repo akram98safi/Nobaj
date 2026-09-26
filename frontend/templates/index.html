@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="page_title">Nobaj Studio</title>
+  <link rel="icon" href="/static/img/logo.svg" type="image/svg+xml">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            obsidian: {
+              950: '#090a0d',
+              900: '#12151c',
+              850: '#181c26',
+              800: '#202633',
+              700: '#333c4f',
+            },
+            violet: {
+              300: '#c4b5fd',
+              400: '#a78bfa',
+              500: '#8b5cf6',
+              600: '#7c3aed',
+              700: '#6d28d9',
+            },
+            titanium: {
+              100: '#f8fafc',
+              200: '#e2e8f0',
+              300: '#cbd5e1',
+              400: '#94a3b8',
+              500: '#64748b',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body class="min-h-screen text-slate-100 flex flex-col justify-between selection:bg-violet-500/30 selection:text-violet-200">
+
+  <!-- Studio Header -->
+  <header class="site-header sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="/" class="flex items-center gap-2 group">
+          <img src="/static/img/logo.svg" alt="Nobaj Studio Logo" class="h-9 w-auto">
+        </a>
+      </div>
+
+      <div class="flex items-center gap-3 sm:gap-4">
+        <!-- Live System Status -->
+        <div class="hidden sm:flex items-center gap-2 text-xs font-medium text-slate-400">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)] animate-pulse"></span>
+          <span class="font-mono text-[11px]" data-i18n="engine_ready">ENGINE READY</span>
+        </div>
+
+        <!-- Language menu -->
+        <div class="language-menu relative">
+          <button id="lang-toggle" type="button" class="language-trigger" aria-expanded="false" aria-haspopup="true">
+            <span class="language-globe" aria-hidden="true">◎</span>
+            <span id="current-language">العربية</span>
+            <svg class="w-3.5 h-3.5 text-slate-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.51a.75.75 0 01-1.08 0l-4.25-4.51a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+            </svg>
+          </button>
+          <div id="lang-menu" class="language-popover hidden" role="menu" aria-label="Language">
+            <div class="language-popover-heading" data-i18n="language_label">Language</div>
+            <div class="language-grid">
+              <button type="button" class="language-option" data-lang="ar" role="menuitem">العربية</button>
+              <button type="button" class="language-option" data-lang="en" role="menuitem">English</button>
+              <button type="button" class="language-option" data-lang="es" role="menuitem">Español</button>
+              <button type="button" class="language-option" data-lang="fr" role="menuitem">Français</button>
+              <button type="button" class="language-option" data-lang="de" role="menuitem">Deutsch</button>
+              <button type="button" class="language-option" data-lang="pt" role="menuitem">Português</button>
+              <button type="button" class="language-option" data-lang="it" role="menuitem">Italiano</button>
+              <button type="button" class="language-option" data-lang="tr" role="menuitem">Türkçe</button>
+              <button type="button" class="language-option" data-lang="ru" role="menuitem">Русский</button>
+              <button type="button" class="language-option" data-lang="zh" role="menuitem">简体中文</button>
+              <button type="button" class="language-option" data-lang="ja" role="menuitem">日本語</button>
+              <button type="button" class="language-option" data-lang="ko" role="menuitem">한국어</button>
+              <button type="button" class="language-option" data-lang="hi" role="menuitem">हिन्दी</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Workspace Container -->
+  <main class="flex-grow max-w-5xl mx-auto w-full px-4 sm:px-6 py-8 sm:py-12 space-y-9">
+
+    <!-- Hero Title & Architecture Pills -->
+    <div class="text-center space-y-4 max-w-2xl mx-auto hero-block">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-xs font-semibold tracking-wide">
+        <span class="hero-mark" aria-hidden="true">N</span>
+        <span data-i18n="tagline_pill">منصة معالجة الوسائط الاحترافية</span>
+      </div>
+
+      <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight" data-i18n="tagline">
+        استوديو نُبَاج لمعالجة الفيديو والصوت
+      </h1>
+      
+      <p class="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-lg mx-auto" data-i18n="subtitle">
+        أدوات متطورة لضغط الفيديو، استخراج الصوت عالي النقاء، وتحويل GIF فائق الجودة مباشرة على السيرفر.
+      </p>
+
+      <!-- Trust Badges -->
+      <div class="pt-2 flex flex-wrap justify-center items-center gap-3 sm:gap-4 text-xs text-slate-400">
+        <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/[0.05]">
+          <span class="text-violet-400">✓</span> <span data-i18n="trust_ffmpeg">معالجة FFmpeg مباشرة</span>
+        </span>
+        <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/[0.05]">
+          <span class="text-violet-400">✓</span> <span data-i18n="trust_privacy">خصوصية تامة وحذف آلي</span>
+        </span>
+        <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/[0.05]">
+          <span class="text-violet-400">✓</span> <span data-i18n="trust_quality">الحفاظ على أعلى نقاء</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- Public, first-party usage metrics -->
+    <section id="public-stats" class="stats-strip" aria-label="" data-i18n-aria-label="public_stats_label">
+      <div class="stats-heading">
+        <span class="section-kicker" data-i18n="stats_kicker">Nobaj in numbers</span>
+        <span class="stats-live" data-i18n="stats_live">Live totals</span>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-item">
+          <strong id="stat-total-visitors">0</strong>
+          <span data-i18n="stat_total_visitors">Total visitors</span>
+        </div>
+        <div class="stat-item">
+          <strong id="stat-today-visitors">0</strong>
+          <span data-i18n="stat_today_visitors">Visitors today</span>
+        </div>
+        <div class="stat-item">
+          <strong id="stat-completed-operations">0</strong>
+          <span data-i18n="stat_completed_operations">Completed operations</span>
+        </div>
+        <div class="stat-item">
+          <strong id="stat-processed-size">0 MB</strong>
+          <span data-i18n="stat_processed_size">Media processed</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reserved responsive ad space. AdSense is enabled only after IDs are configured. -->
+    {% if adsense_client and adsense_slot_top %}
+    <div class="ad-slot ad-slot-live" aria-label="" data-i18n-aria-label="ad_space">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="{{ adsense_client }}" data-ad-slot="{{ adsense_slot_top }}" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    </div>
+    {% else %}
+    <div class="ad-slot ad-slot-placeholder" aria-label="" data-i18n-aria-label="ad_space">
+      <span data-i18n="ad_space">Advertising space</span>
+    </div>
+    {% endif %}
+
+    <!-- Studio Deck Switcher (Tabs) -->
+    <div class="flex justify-center">
+      <div class="tab-switcher inline-flex p-1.5 rounded-2xl">
+        <button class="tab-btn active-tab px-5 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2.5" data-tab="compress">
+          <span>🎬</span>
+          <span data-i18n="tab_compress">ضغط الفيديو</span>
+        </button>
+        <button class="tab-btn px-5 py-2.5 rounded-xl font-bold text-sm text-slate-400 hover:text-white flex items-center gap-2.5" data-tab="audio">
+          <span>🎙️</span>
+          <span data-i18n="tab_audio">استخراج الصوت</span>
+        </button>
+        <button class="tab-btn px-5 py-2.5 rounded-xl font-bold text-sm text-slate-400 hover:text-white flex items-center gap-2.5" data-tab="gif">
+          <span>🎞️</span>
+          <span data-i18n="tab_gif">تحويل إلى GIF</span>
+        </button>
+        <button class="tab-btn px-4 py-2.5 rounded-xl font-medium text-xs text-slate-500 cursor-not-allowed hidden md:flex items-center gap-1.5" data-tab="more">
+          <span>✨</span>
+          <span data-i18n="tab_more">المزيد قريباً</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Upload Drop Chamber -->
+    <div id="drop-zone" class="dropzone-target relative group cursor-pointer rounded-3xl p-8 sm:p-14 text-center">
+      <input type="file" id="file-input" class="hidden" accept="video/*,audio/*">
+      
+      <div class="space-y-4 max-w-md mx-auto">
+        <div class="w-16 h-16 mx-auto rounded-2xl bg-violet-500/10 border border-violet-500/25 text-violet-400 flex items-center justify-center text-3xl group-hover:scale-105 transition-all duration-300">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+          </svg>
+        </div>
+
+        <div class="space-y-1.5">
+          <h3 class="text-lg sm:text-xl font-bold text-slate-100" data-i18n="drop_title">
+            اسحب وأفلت الفيديو هنا
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-400" data-i18n="drop_desc">
+            أو اضغط لتصفح الملفات من جهازك
+          </p>
+        </div>
+
+        <div class="pt-2 flex flex-wrap justify-center gap-1.5 text-[11px] font-mono text-slate-400">
+          <span class="px-2 py-0.5 rounded bg-black/40 border border-white/[0.06]">MP4</span>
+          <span class="px-2 py-0.5 rounded bg-black/40 border border-white/[0.06]">MKV</span>
+          <span class="px-2 py-0.5 rounded bg-black/40 border border-white/[0.06]">MOV</span>
+          <span class="px-2 py-0.5 rounded bg-black/40 border border-white/[0.06]">WebM</span>
+          <span class="px-2 py-0.5 rounded bg-black/40 border border-white/[0.06]">AVI</span>
+          <span class="px-2 py-0.5 rounded bg-violet-500/10 text-violet-300 border border-violet-500/20" data-i18n="upload_limit" data-i18n-size="{{ max_upload_size_mb }}">Up to {{ max_upload_size_mb }} MB</span>
+          <span class="w-full pt-1 text-slate-500" data-i18n="drop_hint">Choose a media file to preview its details.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upload Streaming Progress -->
+    <div id="upload-progress-container" class="hidden studio-card p-6 rounded-2xl space-y-3">
+      <div class="flex justify-between items-center text-xs font-semibold text-slate-300">
+        <span class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-violet-400 animate-ping"></span>
+          <span data-i18n="uploading">جاري رفع الملف وفحصه...</span>
+        </span>
+      </div>
+      <div class="progress-track w-full rounded-full h-2 overflow-hidden">
+        <div id="upload-bar" class="progress-fill h-full rounded-full transition-all duration-200" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <!-- Media Studio Deck & Parameters (Visible after upload) -->
+    <div id="editor-area" class="hidden space-y-8">
+      
+      <!-- Video Preview Monitor & Telemetry -->
+      <div class="studio-panel p-6 sm:p-7 rounded-3xl grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+        <!-- Cinema Monitor -->
+        <div class="lg:col-span-6 overflow-hidden rounded-2xl bg-black aspect-video flex items-center justify-center border border-white/[0.08] shadow-inner">
+          <video id="video-preview-player" aria-label="" data-i18n-aria-label="video_preview" controls class="w-full h-full object-contain"></video>
+        </div>
+
+        <!-- Telemetry Cards -->
+        <div class="lg:col-span-6 space-y-4" aria-label="" data-i18n-aria-label="file_info">
+          <div class="border-b border-white/[0.08] pb-3">
+            <span class="text-[11px] font-mono text-violet-400 uppercase tracking-wider block" data-i18n="source_media">SOURCE MEDIA</span>
+            <h4 id="meta-filename" class="text-base font-bold text-white truncate max-w-md">filename.mp4</h4>
+          </div>
+          
+          <div class="grid grid-cols-2 gap-3 text-xs">
+            <div class="p-3 rounded-xl bg-obsidian-950/80 border border-white/[0.06]">
+              <span class="text-slate-400 block text-[11px]" data-i18n="size">الحجم الأصلي</span>
+              <span id="meta-size" class="font-bold font-mono text-slate-200 text-sm">-</span>
+            </div>
+            <div class="p-3 rounded-xl bg-obsidian-950/80 border border-white/[0.06]">
+              <span class="text-slate-400 block text-[11px]" data-i18n="duration">المدة</span>
+              <span id="meta-duration" class="font-bold font-mono text-slate-200 text-sm">-</span>
+            </div>
+            <div class="p-3 rounded-xl bg-obsidian-950/80 border border-white/[0.06]">
+              <span class="text-slate-400 block text-[11px]" data-i18n="resolution">الأبعاد</span>
+              <span id="meta-resolution" class="font-bold font-mono text-slate-200 text-sm">-</span>
+            </div>
+            <div class="p-3 rounded-xl bg-obsidian-950/80 border border-white/[0.06]">
+              <span class="text-slate-400 block text-[11px]" data-i18n="codec">الكوديك</span>
+              <span id="meta-codec" class="font-bold font-mono text-slate-200 text-sm">-</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls & Strategy Options Container -->
+      <div id="editor-controls" class="studio-panel p-6 sm:p-8 rounded-3xl">
+
+        <!-- 1. Compressor Tab Options -->
+        <div id="panel-compress" class="tab-panel space-y-6">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+            <!-- Quality level -->
+            <div class="space-y-2">
+              <label class="block text-xs font-bold text-slate-300" data-i18n="comp_level">مستوى الضغط</label>
+              <select id="comp-quality-select" class="w-full px-3.5 py-2.5 rounded-xl text-sm font-medium outline-none">
+                <option value="medium" selected data-i18n="comp_balanced">متوازن (موصى به - توفير 50-60%)</option>
+                <option value="low" data-i18n="comp_aggressive">ضغط فائق (توفير أقصى 70-80%)</option>
+                <option value="high" data-i18n="comp_quality">جودة سينمائية (توفير طفيف 20-30%)</option>
+              </select>
+            </div>
+
+            <!-- Resolution -->
+            <div class="space-y-2">
+              <label class="block text-xs font-bold text-slate-300" data-i18n="comp_res">تغيير دقة الفيديو</label>
+              <select id="comp-res-select" class="w-full px-3.5 py-2.5 rounded-xl text-sm font-medium outline-none">
+                <option value="original" selected data-i18n="res_keep">الحفاظ على الدقة الأصلية</option>
+                <option value="1080p">1080p Full HD</option>
+                <option value="720p">720p HD</option>
+                <option value="480p">480p SD</option>
+                <option value="360p">360p Low</option>
+              </select>
+            </div>
+
+            <!-- Codec -->
+            <div class="space-y-2">
+              <label class="block text-xs font-bold text-slate-300" data-i18n="comp_codec">ترميز الفيديو (Codec)</label>
+              <select id="comp-codec-select" class="w-full px-3.5 py-2.5 rounded-xl text-sm font-medium outline-none">
+                <option value="h264" selected data-i18n="codec_h264">H.264 (توافق عالمي مع كافة الأجهزة)</option>
+                <option value="h265" data-i18n="codec_h265">H.265 / HEVC (ضغط مضاعف متقدم)</option>
+                <option value="vp9" data-i18n="codec_vp9">VP9 (معيار الويب WebM)</option>
+              </select>
+            </div>
+          </div>
+
+          <button id="btn-start-compress" class="btn-violet w-full py-4 rounded-xl text-base flex items-center justify-center gap-2">
+            <span data-i18n="comp_btn">بدء معالجة وضغط الفيديو ⚡</span>
+          </button>
+        </div>
+
+        <!-- 2. Audio Extractor Tab Options -->
+        <div id="panel-audio" class="tab-panel hidden space-y-6">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+            <!-- Audio Format -->
+            <div class="space-y-2">
+              <label class="block text-xs font-bold text-slate-300" data-i18n="audio_format">صيغة الصوت المستخرج</label>
+              <select id="audio-format-select" class="w-full px-3.5 py-2.5 rounded-xl text-sm font-medium outline-none">
+                <option value="mp3" selected data-i18n="format_mp3">MP3 (توافق قياسي)</option>
+                <option value="aac" data-i18n="format_aac">AAC (جودة عالية)</option>
+                <option value="wav" data-i18n="format_wav">WAV (أصلي غير مضغوط)</option>
+                <option value="flac" data-i18n="format_flac">FLAC (نقاء استوديو فائق)</option>
+                <option value="ogg" data-i18n="format_ogg">OGG Vorbis</option>
+              </select>
+            </div>
+
+            <!-- Bitrate -->
+            <div class="space-y-2">
+              <label class="block text-xs font-bold text-slate-300" data-i18n="audio_bitrate">معدل البت (الجودة)</label>
+              <select id="audio-bitrate-select" class="w-full px-3.5 py-2.5 rounded-xl text-sm font-medium outline-none">
+                <option value="320k" data-i18n="bitrate_320">320 kbps (جودة استوديو قصوى)</option>
+                <option value="256k" data-i18n="bitrate_256">256 kbps (عالية جداً)</option>
+                <option value="192k" selected data-i18n="bitrate_192">192 kbps (جودة قياسية متوازنة)</option>
+                <option value="128k" data-i18n="bitrate_128">128 kbps (حجم خفيف)</option>
+              </select>
+            </div>
+
+            <!-- Channels -->
+            <div class="space-y-2">
+              <label class="block text-xs font-bold text-slate-300" data-i18n="audio_channels">القنوات الصوتية</label>
+              <select id="audio-channels-select" class="w-full px-3.5 py-2.5 rounded-xl text-sm font-medium outline-none">
+                <option value="original" selected data-i18n="channels_original">الأصلية (تلقائي)</option>
+                <option value="stereo" data-i18n="audio_ch_stereo">ستيريو (Stereo - مجسم)</option>
+                <option value="mono" data-i18n="audio_ch_mono">مونو (Mono - قناة واحدة)</option>
+              </select>
+            </div>
+          </div>
+
+          <button id="btn-start-audio" class="btn-violet w-full py-4 rounded-xl text-base flex items-center justify-center gap-2">
+            <span data-i18n="audio_btn">بدء استخراج المقطع الصوتي 🎙️</span>
+          </button>
+        </div>
+
+        <!-- 3. Video to GIF Tab Options -->
+        <div id="panel-gif" class="tab-panel hidden space-y-6">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <!-- FPS -->
+            <div class="space-y-2">
+              <label class="block text-xs font-bold text-slate-300" data-i18n="gif_fps">معدل الإطارات (FPS)</label>
+              <select id="gif-fps-select" class="w-full px-3.5 py-2.5 rounded-xl text-sm font-medium outline-none">
+                <option value="10" data-i18n="fps_10">10 FPS (حجم صغير جداً)</option>
+                <option value="15" selected data-i18n="fps_15">15 FPS (متوازن وسلس)</option>
+                <option value="20" data-i18n="fps_20">20 FPS (سلاسة سينمائية)</option>
+                <option value="24" data-i18n="fps_24">24 FPS (أقصى نعومة حركة)</option>
+              </select>
+            </div>
+
+            <!-- Resolution -->
+            <div class="space-y-2">
+              <label class="block text-xs font-bold text-slate-300" data-i18n="gif_res">أبعاد الـ GIF</label>
+              <select id="gif-res-select" class="w-full px-3.5 py-2.5 rounded-xl text-sm font-medium outline-none">
+                <option value="320" data-i18n="gif_res_320">320px (Tiny - خفيف)</option>
+                <option value="480" selected data-i18n="gif_res_480">480px (Standard - قياسي)</option>
+                <option value="640" data-i18n="gif_res_640">640px (Medium - متوسط)</option>
+                <option value="720" data-i18n="gif_res_720">720px (HD - عالي الوضوح)</option>
+                <option value="original" data-i18n="gif_res_original">Original (الأصلية)</option>
+              </select>
+            </div>
+
+            <!-- Trim Start -->
+            <div class="space-y-2">
+              <label class="block text-xs font-bold text-slate-300" data-i18n="gif_start">نقطة البداية (ثواني)</label>
+              <input type="number" id="gif-trim-start" step="0.5" min="0" value="0" class="w-full px-3.5 py-2.5 rounded-xl text-sm font-medium outline-none">
+            </div>
+
+            <!-- Trim End -->
+            <div class="space-y-2">
+              <label class="block text-xs font-bold text-slate-300" data-i18n="gif_end">نقطة النهاية (ثواني)</label>
+              <input type="number" id="gif-trim-end" step="0.5" min="0" value="5" class="w-full px-3.5 py-2.5 rounded-xl text-sm font-medium outline-none">
+            </div>
+          </div>
+
+          <button id="btn-start-gif" class="btn-violet w-full py-4 rounded-xl text-base flex items-center justify-center gap-2">
+            <span data-i18n="gif_btn">إنشاء الـ GIF عالي الدقة 🎞️</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Live Processing Card (Queue & Progress) -->
+      <div id="processing-area" class="hidden studio-panel p-8 rounded-3xl space-y-5 text-center">
+        <div class="space-y-2">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-xs font-mono">
+            <span class="w-2 h-2 rounded-full bg-violet-400 animate-ping"></span>
+            <span id="job-status-text" data-i18n="status_processing">جاري المعالجة بواسطة السيرفر...</span>
+          </div>
+
+          <div class="flex justify-center items-center gap-6 text-xs text-slate-400 font-mono pt-1">
+            <span id="job-speed"></span>
+            <span id="job-eta"></span>
+          </div>
+        </div>
+
+        <div class="progress-track w-full rounded-full h-3 overflow-hidden">
+          <div id="job-progress-bar" class="progress-fill h-full rounded-full transition-all duration-300" style="width: 5%"></div>
+        </div>
+
+        <div class="flex justify-between items-center text-xs text-slate-400 px-1">
+          <button id="btn-cancel-job" class="text-rose-400 hover:text-rose-300 transition-colors font-semibold" data-i18n="cancel_btn">
+            إلغاء العملية
+          </button>
+          <span id="job-progress-percent" class="font-extrabold text-violet-400 text-sm font-mono">0%</span>
+        </div>
+      </div>
+
+      {% if adsense_client and adsense_slot_bottom %}
+      <div class="ad-slot ad-slot-live" aria-label="Advertisement">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="{{ adsense_client }}" data-ad-slot="{{ adsense_slot_bottom }}" data-ad-format="auto" data-full-width-responsive="true"></ins>
+      </div>
+      {% else %}
+      <div class="ad-slot ad-slot-placeholder" aria-label="Advertisement">
+        <span data-i18n="ad_space">Advertising space</span>
+      </div>
+      {% endif %}
+
+      <!-- Completed Download Card -->
+      <div id="completed-area" class="hidden studio-panel border-violet-500/30 p-8 rounded-3xl text-center space-y-6">
+        <div class="w-16 h-16 mx-auto rounded-2xl bg-violet-500/10 border border-violet-500/30 text-violet-400 flex items-center justify-center text-3xl">
+          ✓
+        </div>
+
+        <div class="space-y-1">
+          <h3 class="text-2xl font-black text-white" data-i18n="ready_title">تمت المعالجة بنجاح!</h3>
+          <p id="result-filename" class="text-xs text-slate-400 truncate max-w-sm mx-auto font-mono"></p>
+        </div>
+
+        <!-- Comparative Metrics -->
+        <div class="inline-flex items-center gap-4 px-6 py-3 rounded-2xl bg-obsidian-950 border border-white/[0.08] text-sm">
+          <span class="text-slate-400" data-i18n="new_size">الحجم النهائي:</span>
+          <span id="result-new-size" class="font-bold text-white font-mono">-</span>
+          <span id="result-savings-badge" class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 font-bold text-xs font-mono">
+            -
+          </span>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <a id="btn-download-result" href="#" download class="btn-violet px-8 py-3.5 rounded-xl text-base flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+            </svg>
+            <span data-i18n="download_btn">تحميل الملف الآن</span>
+          </a>
+          <button id="btn-convert-another" class="btn-ghost px-6 py-3.5 rounded-xl text-sm" data-i18n="convert_another">
+            معالجة ملف آخر
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Studio Footer -->
+  <footer class="border-t border-white/[0.06] bg-[#090a0d] py-6 text-center text-xs text-slate-500 space-y-2">
+    <p class="font-medium" data-i18n="footer_title">Nobaj Media Studio • Server-side FFmpeg Engine</p>
+    <p class="text-[11px] text-slate-600" data-i18n="footer_privacy" data-i18n-ttl="{{ file_ttl_minutes }}">
+      يتم تنظيف وحذف الملفات المؤقتة والنهائية آلياً بعد {{ file_ttl_minutes }} دقيقة لضمان الخصوصية التامة.
+    </p>
+  </footer>
+
+  <!-- Application JS Bundle -->
+  <script src="/static/js/app.js"></script>
+  {% if adsense_client %}
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ adsense_client }}" crossorigin="anonymous"></script>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  {% endif %}
+</body>
+</html>

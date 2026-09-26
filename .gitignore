@@ -1,0 +1,30 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Data & media storage
+data/
+data/uploads/*
+data/outputs/*
+data/temp/*
+!data/uploads/.gitkeep
+!data/outputs/.gitkeep
+!data/temp/.gitkeep
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Docker
+*.log
+docker/*.log

@@ -1,0 +1,48 @@
+services:
+  nobaj:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: nobaj_app
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${PORT:-8000}:8000"
+    env_file:
+      - .env
+    volumes:
+      - nobaj_uploads:/app/data/uploads
+      - nobaj_outputs:/app/data/outputs
+      - nobaj_temp:/app/data/temp
+      - nobaj_analytics:/app/data/analytics
+    # Hardware acceleration devices passthrough (uncomment if GPU server)
+    # devices:
+    #   - /dev/dri:/dev/dri
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 4096M
+        reservations:
+          memory: 512M
+
+  nginx:
+    image: nginx:alpine
+    container_name: nobaj_proxy
+    restart: unless-stopped
+    profiles: ["production"]
+    depends_on:
+      - nobaj
+    ports:
+      - "80:80"
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/nginx.conf:ro
+
+volumes:
+  nobaj_uploads:
+    driver: local
+  nobaj_outputs:
+    driver: local
+  nobaj_temp:
+    driver: local
+  nobaj_analytics:
+    driver: local
