@@ -7,7 +7,7 @@ from datetime import datetime
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import HTMLResponse, PlainTextResponse
+from fastapi.responses import HTMLResponse, PlainTextResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
@@ -45,7 +45,31 @@ for language in SUPPORTED_LANGUAGES:
 
 
 def language_path(language: str) -> str:
-    return "/" if language == "ar" else f"/{language}"
+    return "/" if language == "en" else f"/{language}"
+
+
+def preferred_language(request: Request) -> str:
+    """Choose a saved language, then the best supported browser language."""
+    saved_language = request.cookies.get("nobaj_lang", "").lower()
+    if saved_language in SUPPORTED_LANGUAGES:
+        return saved_language
+
+    accepted_languages = []
+    for preference in request.headers.get("accept-language", "").split(","):
+        parts = preference.strip().split(";", 1)
+        language = parts[0].strip().replace("_", "-").split("-", 1)[0].lower()
+        quality = 1.0
+        if len(parts) == 2 and parts[1].strip().startswith("q="):
+            try:
+                quality = float(parts[1].strip()[2:])
+            except ValueError:
+                quality = 0.0
+        if quality > 0 and language in SUPPORTED_LANGUAGES:
+            accepted_languages.append((quality, len(accepted_languages), language))
+
+    if accepted_languages:
+        return max(accepted_languages, key=lambda item: (item[0], -item[1]))[2]
+    return "en"
 
 
 @asynccontextmanager
@@ -104,8 +128,19 @@ app.include_router(api_router)
 
 @app.get("/", response_class=HTMLResponse)
 async def index_page(request: Request):
-    """Render main interactive user interface."""
-    return await render_index_page(request, "ar")
+    """Serve English by default and route visitors to their preferred locale."""
+    requested_language = request.query_params.get("lang", "").lower()
+    language = requested_language if requested_language in SUPPORTED_LANGUAGES else preferred_language(request)
+    if language != "en":
+        response = RedirectResponse(language_path(language), status_code=302)
+        response.headers["Vary"] = "Accept-Language, Cookie"
+        response.headers["Cache-Control"] = "private, no-store"
+        return response
+
+    response = await render_index_page(request, "en")
+    response.headers["Vary"] = "Accept-Language, Cookie"
+    response.headers["Cache-Control"] = "private, no-store"
+    return response
 
 
 async def render_index_page(request: Request, language: str):
@@ -149,6 +184,15 @@ async def render_index_page(request: Request, language: str):
         samesite="lax",
         secure=request.url.scheme == "https" or request.headers.get("x-forwarded-proto") == "https",
     )
+    response.set_cookie(
+        "nobaj_lang",
+        language,
+        max_age=60 * 60 * 24 * 365,
+        httponly=True,
+        samesite="lax",
+        secure=request.url.scheme == "https" or request.headers.get("x-forwarded-proto") == "https",
+    )
+    response.headers["Content-Language"] = language
     return response
 
 

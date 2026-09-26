@@ -140,7 +140,7 @@ function setupLanguage() {
       } catch (error) {
         // The language switch still works when browser storage is disabled.
       }
-      window.location.assign(selectedLanguage === 'ar' ? '/' : `/${selectedLanguage}`);
+      window.location.assign(selectedLanguage === 'en' ? '/?lang=en' : `/${selectedLanguage}`);
     });
   });
 
