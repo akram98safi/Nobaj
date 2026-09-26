@@ -117,14 +117,5 @@
   "public_stats_label": "公开使用统计",
   "meta_description": "免费在线工具，可压缩视频、提取音频并将视频片段转换为 GIF。选择设置并下载处理后的文件。",
   "og_title": "Nobaj Studio | 在线视频、音频和 GIF 工具",
-  "og_description": "免费在线工具，可压缩视频、提取音频并将视频片段转换为 GIF。选择设置并下载处理后的文件。",
-  "admin_search_indexing": "搜索引擎收录",
-  "admin_live_check": "实时检查",
-  "admin_robots_file": "robots.txt 文件",
-  "admin_sitemap_file": "XML 网站地图",
-  "admin_seo_checking": "正在检查…",
-  "admin_seo_available": "可用",
-  "admin_seo_unavailable": "不可用",
-  "admin_sitemap_available": "{count} 个网址",
-  "admin_seo_hint": "此处仅检查文件是否可访问。抓取和收录报告请在 Google Search Console 中查看。"
+  "og_description": "免费在线工具，可压缩视频、提取音频并将视频片段转换为 GIF。选择设置并下载处理后的文件。"
 }

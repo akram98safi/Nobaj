@@ -117,14 +117,5 @@
   "public_stats_label": "Statistiche di utilizzo pubbliche",
   "meta_description": "Strumenti online gratuiti per comprimere video, estrarre l’audio e convertire clip video in GIF. Scegli le impostazioni e scarica il file elaborato.",
   "og_title": "Nobaj Studio | Strumenti online per video, audio e GIF",
-  "og_description": "Strumenti online gratuiti per comprimere video, estrarre l’audio e convertire clip video in GIF. Scegli le impostazioni e scarica il file elaborato.",
-  "admin_search_indexing": "Indicizzazione sui motori di ricerca",
-  "admin_live_check": "Controllo in tempo reale",
-  "admin_robots_file": "File robots.txt",
-  "admin_sitemap_file": "Mappa del sito XML",
-  "admin_seo_checking": "Controllo in corso…",
-  "admin_seo_available": "Disponibile",
-  "admin_seo_unavailable": "Non disponibile",
-  "admin_sitemap_available": "{count} URL",
-  "admin_seo_hint": "Questi controlli verificano solo che i file siano accessibili. I report di scansione e indicizzazione sono disponibili in Google Search Console."
+  "og_description": "Strumenti online gratuiti per comprimere video, estrarre l’audio e convertire clip video in GIF. Scegli le impostazioni e scarica il file elaborato."
 }

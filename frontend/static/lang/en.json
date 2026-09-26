@@ -117,14 +117,5 @@
   "public_stats_label": "Public usage statistics",
   "meta_description": "Free online tools to compress videos, extract audio, and convert video clips to GIF. Choose your settings and download the processed file.",
   "og_title": "Nobaj Studio | Online Video, Audio & GIF Tools",
-  "og_description": "Free online tools to compress videos, extract audio, and convert video clips to GIF. Choose your settings and download the processed file.",
-  "admin_search_indexing": "Search indexing",
-  "admin_live_check": "Live check",
-  "admin_robots_file": "robots.txt file",
-  "admin_sitemap_file": "XML sitemap",
-  "admin_seo_checking": "Checking…",
-  "admin_seo_available": "Available",
-  "admin_seo_unavailable": "Unavailable",
-  "admin_sitemap_available": "{count} URLs",
-  "admin_seo_hint": "These checks confirm that the files are served. Search crawl and indexing reports are available in Google Search Console."
+  "og_description": "Free online tools to compress videos, extract audio, and convert video clips to GIF. Choose your settings and download the processed file."
 }
