@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-i18n="page_title">نُباج — ضغط الفيديو واستخراج الصوت وتحويله إلى GIF</title>
+  <title data-i18n="page_title">{{ seo_meta.page_title }}</title>
 
   <!-- SEO Core Meta Tags -->
-  <meta name="description" data-i18n-content="meta_description" content="أدوات مجانية لمعالجة الوسائط عبر الإنترنت: ضغط الفيديو، استخراج الصوت وتحويل الفيديو إلى GIF. اختر إعداداتك وحمّل النتيجة بعد اكتمال المعالجة.">
+  <meta name="description" data-i18n-content="meta_description" content="{{ seo_meta.meta_description }}">
   <meta name="author" content="Nobaj Studio">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#8b5cf6">
@@ -23,8 +23,8 @@
   <!-- Open Graph (Facebook, LinkedIn, WhatsApp, Telegram) -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Nobaj Studio">
-  <meta property="og:title" data-i18n-content="og_title" content="نُباج — ضغط الفيديو واستخراج الصوت وتحويله إلى GIF">
-  <meta property="og:description" data-i18n-content="og_description" content="أدوات مجانية لمعالجة الوسائط عبر الإنترنت: ضغط الفيديو، استخراج الصوت وتحويل الفيديو إلى GIF.">
+  <meta property="og:title" data-i18n-content="og_title" content="{{ seo_meta.og_title }}">
+  <meta property="og:description" data-i18n-content="og_description" content="{{ seo_meta.og_description }}">
   <meta property="og:url" content="{{ canonical_url }}">
   <meta property="og:image" content="{{ site_url }}/static/img/og-cover.png">
   <meta property="og:image:width" content="1200">
@@ -34,8 +34,8 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" data-i18n-content="og_title" content="نُباج — ضغط الفيديو واستخراج الصوت وتحويله إلى GIF">
-  <meta name="twitter:description" data-i18n-content="og_description" content="أدوات مجانية لمعالجة الوسائط عبر الإنترنت: ضغط الفيديو، استخراج الصوت وتحويل الفيديو إلى GIF.">
+  <meta name="twitter:title" data-i18n-content="og_title" content="{{ seo_meta.og_title }}">
+  <meta name="twitter:description" data-i18n-content="og_description" content="{{ seo_meta.og_description }}">
   <meta name="twitter:image" content="{{ site_url }}/static/img/og-cover.png">
 
   <!-- Favicons & Touch Icons -->
@@ -54,7 +54,7 @@
     "@type": ["WebApplication", "SoftwareApplication"],
     "name": "Nobaj Studio",
     "url": "{{ canonical_url }}",
-    "description": "Free online tools for compressing videos, extracting audio, and converting video clips to GIF.",
+    "description": {{ seo_meta.meta_description | tojson }},
     "applicationCategory": "MultimediaApplication",
     "operatingSystem": "Any",
     "inLanguage": "{{ page_language }}",

@@ -1,6 +1,7 @@
 """Main FastAPI entry point for Nobaj platform."""
 
 import logging
+import json
 from contextlib import asynccontextmanager
 from datetime import datetime
 from pathlib import Path
@@ -26,12 +27,21 @@ logger = logging.getLogger("nobaj")
 FRONTEND_DIR = Path(__file__).resolve().parent.parent.parent / "frontend"
 STATIC_DIR = FRONTEND_DIR / "static"
 TEMPLATES_DIR = FRONTEND_DIR / "templates"
+LANG_DIR = STATIC_DIR / "lang"
 SUPPORTED_LANGUAGES = ("ar", "en", "es", "fr", "de", "pt", "it", "tr", "ru", "zh", "ja", "ko", "hi")
 OPEN_GRAPH_LOCALES = {
     "ar": "ar_SA", "en": "en_US", "es": "es_ES", "fr": "fr_FR",
     "de": "de_DE", "pt": "pt_BR", "it": "it_IT", "tr": "tr_TR",
     "ru": "ru_RU", "zh": "zh_CN", "ja": "ja_JP", "ko": "ko_KR", "hi": "hi_IN",
 }
+SEO_METADATA = {}
+for language in SUPPORTED_LANGUAGES:
+    with (LANG_DIR / f"{language}.json").open(encoding="utf-8") as language_file:
+        language_data = json.load(language_file)
+    SEO_METADATA[language] = {
+        key: language_data[key]
+        for key in ("page_title", "meta_description", "og_title", "og_description")
+    }
 
 
 def language_path(language: str) -> str:
@@ -116,6 +126,7 @@ async def render_index_page(request: Request, language: str):
             "site_url": settings.PUBLIC_BASE_URL.rstrip("/"),
             "canonical_url": f"{settings.PUBLIC_BASE_URL.rstrip('/')}{language_path(language)}",
             "page_language": language,
+            "seo_meta": SEO_METADATA[language],
             "open_graph_locale": OPEN_GRAPH_LOCALES[language],
             "language_alternates": [
                 (code, f"{settings.PUBLIC_BASE_URL.rstrip('/')}{language_path(code)}")
