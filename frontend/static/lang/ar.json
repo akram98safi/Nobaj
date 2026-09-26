@@ -117,5 +117,14 @@
   "public_stats_label": "إحصاءات الاستخدام العامة",
   "meta_description": "أدوات مجانية لمعالجة الوسائط عبر الإنترنت: ضغط الفيديو، استخراج الصوت وتحويل الفيديو إلى GIF.",
   "og_title": "نُباج — ضغط الفيديو واستخراج الصوت وتحويله إلى GIF",
-  "og_description": "أدوات مجانية لمعالجة الوسائط عبر الإنترنت: ضغط الفيديو، استخراج الصوت وتحويل الفيديو إلى GIF."
+  "og_description": "أدوات مجانية لمعالجة الوسائط عبر الإنترنت: ضغط الفيديو، استخراج الصوت وتحويل الفيديو إلى GIF.",
+  "admin_search_indexing": "فهرسة محركات البحث",
+  "admin_live_check": "فحص مباشر",
+  "admin_robots_file": "ملف robots.txt",
+  "admin_sitemap_file": "خريطة الموقع XML",
+  "admin_seo_checking": "جارٍ الفحص…",
+  "admin_seo_available": "متاح",
+  "admin_seo_unavailable": "غير متاح",
+  "admin_sitemap_available": "{count} رابطًا",
+  "admin_seo_hint": "يتحقق هذا القسم من إتاحة الملفات فقط. تقارير الزحف والفهرسة تظهر في Google Search Console."
 }

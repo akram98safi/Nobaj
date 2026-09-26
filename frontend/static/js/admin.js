@@ -88,6 +88,7 @@ async function loadDashboard() {
     }
     const data = await response.json();
     renderDashboard(data);
+    await loadSeoFileStatus();
   } catch (error) {
     showError(adminText('admin_connection_error'));
   }
@@ -116,6 +117,37 @@ function renderDashboard(data) {
     <tr><td>${escapeHtml(item.day)}</td><td>${item.visits}</td><td>${item.unique_visitors}</td></tr>
   `).join('') || `<tr><td colspan="3">${escapeHtml(adminText('admin_no_visits'))}</td></tr>`;
   setText('admin-status', adminText('admin_database', { database: data.database }));
+}
+
+async function loadSeoFileStatus() {
+  const robotsStatus = document.getElementById('admin-robots-status');
+  const sitemapStatus = document.getElementById('admin-sitemap-status');
+  if (!robotsStatus || !sitemapStatus) return;
+
+  setText(robotsStatus.id, adminText('admin_seo_checking'));
+  setText(sitemapStatus.id, adminText('admin_seo_checking'));
+
+  const [robotsResult, sitemapResult] = await Promise.allSettled([
+    fetch('/robots.txt', { cache: 'no-store' }).then(async response => ({
+      ok: response.ok && /^User-agent:\s*\*/m.test(await response.text()),
+    })),
+    fetch('/sitemap.xml', { cache: 'no-store' }).then(async response => {
+      const xml = await response.text();
+      const urlCount = (xml.match(/<loc>/g) || []).length;
+      return { ok: response.ok && urlCount > 0, urlCount };
+    }),
+  ]);
+
+  const robotsAvailable = robotsResult.status === 'fulfilled' && robotsResult.value.ok;
+  setText('admin-robots-status', adminText(robotsAvailable ? 'admin_seo_available' : 'admin_seo_unavailable'));
+
+  const sitemapAvailable = sitemapResult.status === 'fulfilled' && sitemapResult.value.ok;
+  setText(
+    'admin-sitemap-status',
+    sitemapAvailable
+      ? adminText('admin_sitemap_available', { count: sitemapResult.value.urlCount })
+      : adminText('admin_seo_unavailable'),
+  );
 }
 
 function showError(message) {

@@ -91,7 +91,7 @@
   "admin_description": "Enter the admin token to view site and operation statistics.",
   "admin_token": "Admin token",
   "admin_show_stats": "View analytics",
-  "admin_overview": "Overview",
+  "admin_overview": "概要",
   "admin_refresh": "Refresh",
   "admin_logout": "Log out",
   "admin_total_visitors": "Total visitors",
@@ -117,5 +117,14 @@
   "public_stats_label": "公開利用統計",
   "meta_description": "動画の圧縮、音声の抽出、動画クリップのGIF変換ができる無料オンラインツールです。設定を選んで、処理済みファイルをダウンロードできます。",
   "og_title": "Nobaj Studio | オンライン動画・音声・GIFツール",
-  "og_description": "動画の圧縮、音声の抽出、動画クリップのGIF変換ができる無料オンラインツールです。設定を選んで、処理済みファイルをダウンロードできます。"
+  "og_description": "動画の圧縮、音声の抽出、動画クリップのGIF変換ができる無料オンラインツールです。設定を選んで、処理済みファイルをダウンロードできます。",
+  "admin_search_indexing": "検索エンジンのインデックス",
+  "admin_live_check": "ライブチェック",
+  "admin_robots_file": "robots.txt ファイル",
+  "admin_sitemap_file": "XML サイトマップ",
+  "admin_seo_checking": "確認中…",
+  "admin_seo_available": "利用可能",
+  "admin_seo_unavailable": "利用不可",
+  "admin_sitemap_available": "{count} 件の URL",
+  "admin_seo_hint": "ここではファイルが配信されているかだけを確認します。クロールとインデックスのレポートは Google Search Console で確認できます。"
 }

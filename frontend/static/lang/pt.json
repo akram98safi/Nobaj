@@ -91,7 +91,7 @@
   "admin_description": "Enter the admin token to view site and operation statistics.",
   "admin_token": "Admin token",
   "admin_show_stats": "View analytics",
-  "admin_overview": "Overview",
+  "admin_overview": "Visão geral",
   "admin_refresh": "Refresh",
   "admin_logout": "Log out",
   "admin_total_visitors": "Total visitors",
@@ -117,5 +117,14 @@
   "public_stats_label": "Estat?sticas p?blicas de uso",
   "meta_description": "Ferramentas online gratuitas para comprimir vídeos, extrair áudio e converter clipes de vídeo em GIF. Escolha as definições e transfira o ficheiro processado.",
   "og_title": "Nobaj Studio | Ferramentas online de vídeo, áudio e GIF",
-  "og_description": "Ferramentas online gratuitas para comprimir vídeos, extrair áudio e converter clipes de vídeo em GIF. Escolha as definições e transfira o ficheiro processado."
+  "og_description": "Ferramentas online gratuitas para comprimir vídeos, extrair áudio e converter clipes de vídeo em GIF. Escolha as definições e transfira o ficheiro processado.",
+  "admin_search_indexing": "Indexação nos motores de busca",
+  "admin_live_check": "Verificação em tempo real",
+  "admin_robots_file": "Ficheiro robots.txt",
+  "admin_sitemap_file": "Mapa do site XML",
+  "admin_seo_checking": "A verificar…",
+  "admin_seo_available": "Disponível",
+  "admin_seo_unavailable": "Indisponível",
+  "admin_sitemap_available": "{count} URLs",
+  "admin_seo_hint": "Estas verificações confirmam apenas se os ficheiros estão disponíveis. Os relatórios de rastreio e indexação estão na Google Search Console."
 }

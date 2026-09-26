@@ -91,7 +91,7 @@
   "admin_description": "Enter the admin token to view site and operation statistics.",
   "admin_token": "Admin token",
   "admin_show_stats": "View analytics",
-  "admin_overview": "Overview",
+  "admin_overview": "Genel bakış",
   "admin_refresh": "Refresh",
   "admin_logout": "Log out",
   "admin_total_visitors": "Total visitors",
@@ -117,5 +117,14 @@
   "public_stats_label": "Genel kullan?m istatistikleri",
   "meta_description": "Videoları sıkıştırmak, sesleri çıkarmak ve video kliplerini GIF'e dönüştürmek için ücretsiz çevrimiçi araçlar. Ayarlarınızı seçin ve işlenen dosyayı indirin.",
   "og_title": "Nobaj Studio | Çevrimiçi Video, Ses ve GIF Araçları",
-  "og_description": "Videoları sıkıştırmak, sesleri çıkarmak ve video kliplerini GIF'e dönüştürmek için ücretsiz çevrimiçi araçlar. Ayarlarınızı seçin ve işlenen dosyayı indirin."
+  "og_description": "Videoları sıkıştırmak, sesleri çıkarmak ve video kliplerini GIF'e dönüştürmek için ücretsiz çevrimiçi araçlar. Ayarlarınızı seçin ve işlenen dosyayı indirin.",
+  "admin_search_indexing": "Arama motoru dizine ekleme",
+  "admin_live_check": "Canlı kontrol",
+  "admin_robots_file": "robots.txt dosyası",
+  "admin_sitemap_file": "XML site haritası",
+  "admin_seo_checking": "Kontrol ediliyor…",
+  "admin_seo_available": "Kullanılabilir",
+  "admin_seo_unavailable": "Kullanılamıyor",
+  "admin_sitemap_available": "{count} URL",
+  "admin_seo_hint": "Bu kontroller yalnızca dosyaların sunulduğunu doğrular. Tarama ve dizine ekleme raporları Google Search Console'da bulunur."
 }

@@ -91,7 +91,7 @@
   "admin_description": "Enter the admin token to view site and operation statistics.",
   "admin_token": "Admin token",
   "admin_show_stats": "View analytics",
-  "admin_overview": "Overview",
+  "admin_overview": "개요",
   "admin_refresh": "Refresh",
   "admin_logout": "Log out",
   "admin_total_visitors": "Total visitors",
@@ -117,5 +117,14 @@
   "public_stats_label": "공개 사용 통계",
   "meta_description": "동영상 압축, 오디오 추출, 동영상 클립의 GIF 변환을 위한 무료 온라인 도구입니다. 설정을 선택하고 처리된 파일을 다운로드하세요.",
   "og_title": "Nobaj Studio | 온라인 동영상·오디오·GIF 도구",
-  "og_description": "동영상 압축, 오디오 추출, 동영상 클립의 GIF 변환을 위한 무료 온라인 도구입니다. 설정을 선택하고 처리된 파일을 다운로드하세요."
+  "og_description": "동영상 압축, 오디오 추출, 동영상 클립의 GIF 변환을 위한 무료 온라인 도구입니다. 설정을 선택하고 처리된 파일을 다운로드하세요.",
+  "admin_search_indexing": "검색엔진 색인",
+  "admin_live_check": "실시간 확인",
+  "admin_robots_file": "robots.txt 파일",
+  "admin_sitemap_file": "XML 사이트맵",
+  "admin_seo_checking": "확인 중…",
+  "admin_seo_available": "사용 가능",
+  "admin_seo_unavailable": "사용할 수 없음",
+  "admin_sitemap_available": "URL {count}개",
+  "admin_seo_hint": "이 확인은 파일 제공 여부만 확인합니다. 크롤링 및 색인 보고서는 Google Search Console에서 볼 수 있습니다."
 }

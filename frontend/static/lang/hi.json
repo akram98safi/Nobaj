@@ -91,7 +91,7 @@
   "admin_description": "Enter the admin token to view site and operation statistics.",
   "admin_token": "Admin token",
   "admin_show_stats": "View analytics",
-  "admin_overview": "Overview",
+  "admin_overview": "अवलोकन",
   "admin_refresh": "Refresh",
   "admin_logout": "Log out",
   "admin_total_visitors": "Total visitors",
@@ -117,5 +117,14 @@
   "public_stats_label": "सार्वजनिक उपयोग के आँकड़े",
   "meta_description": "वीडियो संपीड़ित करने, ऑडियो निकालने और वीडियो क्लिप को GIF में बदलने के लिए मुफ़्त ऑनलाइन टूल। सेटिंग चुनें और संसाधित फ़ाइल डाउनलोड करें।",
   "og_title": "Nobaj Studio | ऑनलाइन वीडियो, ऑडियो और GIF टूल",
-  "og_description": "वीडियो संपीड़ित करने, ऑडियो निकालने और वीडियो क्लिप को GIF में बदलने के लिए मुफ़्त ऑनलाइन टूल। सेटिंग चुनें और संसाधित फ़ाइल डाउनलोड करें।"
+  "og_description": "वीडियो संपीड़ित करने, ऑडियो निकालने और वीडियो क्लिप को GIF में बदलने के लिए मुफ़्त ऑनलाइन टूल। सेटिंग चुनें और संसाधित फ़ाइल डाउनलोड करें।",
+  "admin_search_indexing": "सर्च इंजन इंडेक्सिंग",
+  "admin_live_check": "लाइव जाँच",
+  "admin_robots_file": "robots.txt फ़ाइल",
+  "admin_sitemap_file": "XML साइटमैप",
+  "admin_seo_checking": "जाँच हो रही है…",
+  "admin_seo_available": "उपलब्ध",
+  "admin_seo_unavailable": "उपलब्ध नहीं",
+  "admin_sitemap_available": "{count} URL",
+  "admin_seo_hint": "यह जाँच केवल फ़ाइलों की उपलब्धता बताती है। क्रॉल और इंडेक्सिंग रिपोर्ट Google Search Console में मिलती हैं।"
 }

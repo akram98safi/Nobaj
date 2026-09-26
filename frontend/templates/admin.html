@@ -34,8 +34,7 @@
     <section id="admin-dashboard" class="hidden space-y-6">
       <div class="admin-heading">
         <div>
-          <span class="section-kicker" data-i18n="admin_overview">Nobaj / ANALYTICS</span>
-          <h1>نظرة عامة</h1>
+          <h1 data-i18n="admin_overview">Overview</h1>
         </div>
         <div class="flex gap-2">
           <button id="admin-refresh" class="btn-ghost px-4 py-2.5 rounded-xl text-sm" data-i18n="admin_refresh">Refresh</button>
@@ -49,6 +48,24 @@
         <div class="admin-metric studio-card"><span data-i18n="admin_total_operations">Total operations</span><strong id="admin-total-operations">0</strong></div>
         <div class="admin-metric studio-card"><span data-i18n="admin_completed_operations">Completed operations</span><strong id="admin-completed-operations">0</strong></div>
       </div>
+
+      <section class="studio-panel admin-panel" aria-labelledby="admin-seo-heading">
+        <div class="admin-panel-title">
+          <h2 id="admin-seo-heading" data-i18n="admin_search_indexing">Search indexing</h2>
+          <span data-i18n="admin_live_check">Live check</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="admin-metric studio-card">
+            <a href="/robots.txt" target="_blank" rel="noopener noreferrer" class="text-violet-300 hover:text-white underline underline-offset-4" data-i18n="admin_robots_file">robots.txt</a>
+            <strong id="admin-robots-status" data-i18n="admin_seo_checking">Checking…</strong>
+          </div>
+          <div class="admin-metric studio-card">
+            <a href="/sitemap.xml" target="_blank" rel="noopener noreferrer" class="text-violet-300 hover:text-white underline underline-offset-4" data-i18n="admin_sitemap_file">XML sitemap</a>
+            <strong id="admin-sitemap-status" data-i18n="admin_seo_checking">Checking…</strong>
+          </div>
+        </div>
+        <p class="mt-4 text-xs leading-relaxed text-slate-400" data-i18n="admin_seo_hint">These checks confirm that the files are served. Search crawl and indexing reports are available in Google Search Console.</p>
+      </section>
 
       <div class="admin-panels">
         <section class="studio-panel admin-panel">
