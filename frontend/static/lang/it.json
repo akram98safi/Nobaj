@@ -117,5 +117,19 @@
   "public_stats_label": "Statistiche di utilizzo pubbliche",
   "meta_description": "Strumenti online gratuiti per comprimere video, estrarre l’audio e convertire clip video in GIF. Scegli le impostazioni e scarica il file elaborato.",
   "og_title": "Nobaj Studio | Strumenti online per video, audio e GIF",
-  "og_description": "Strumenti online gratuiti per comprimere video, estrarre l’audio e convertire clip video in GIF. Scegli le impostazioni e scarica il file elaborato."
+  "og_description": "Strumenti online gratuiti per comprimere video, estrarre l’audio e convertire clip video in GIF. Scegli le impostazioni e scarica il file elaborato.",
+  "seo_tool_compress_description": "Riduci online le dimensioni dei video. Scegli qualit?, risoluzione e codec, poi scarica il video compresso.",
+  "seo_tool_audio_description": "Estrai l?audio da un video online. Scegli MP3, AAC, WAV, FLAC o OGG e imposta bitrate e canali.",
+  "seo_tool_gif_description": "Converti un video in GIF online. Scegli frequenza fotogrammi e risoluzione, ritaglia la clip e scaricala.",
+  "tool_how_it_works": "Come funziona",
+  "tool_step_upload": "Carica il file",
+  "tool_step_configure": "Scegli le impostazioni adatte",
+  "tool_step_download": "Elabora e scarica il risultato",
+  "tool_file_retention": "I file caricati e i risultati vengono eliminati dopo {ttl} minuti.",
+  "tool_open_title": "Apri lo strumento",
+  "footer_privacy_link": "Privacy",
+  "footer_terms_link": "Termini",
+  "footer_contact_link": "Contatti",
+  "tool_limit": "Limite: {size} MB e {duration} minuti per file.",
+  "noscript": "Attiva JavaScript per usare gli strumenti Nobaj."
 }

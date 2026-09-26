@@ -1,0 +1,10 @@
+{
+  "name": "nobaj-frontend-assets",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -c tailwind.config.cjs -i frontend/static/css/style.css -o frontend/static/css/app.min.css --minify"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}

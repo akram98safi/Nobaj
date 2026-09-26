@@ -117,5 +117,19 @@
   "public_stats_label": "Genel kullan?m istatistikleri",
   "meta_description": "Videoları sıkıştırmak, sesleri çıkarmak ve video kliplerini GIF'e dönüştürmek için ücretsiz çevrimiçi araçlar. Ayarlarınızı seçin ve işlenen dosyayı indirin.",
   "og_title": "Nobaj Studio | Çevrimiçi Video, Ses ve GIF Araçları",
-  "og_description": "Videoları sıkıştırmak, sesleri çıkarmak ve video kliplerini GIF'e dönüştürmek için ücretsiz çevrimiçi araçlar. Ayarlarınızı seçin ve işlenen dosyayı indirin."
+  "og_description": "Videoları sıkıştırmak, sesleri çıkarmak ve video kliplerini GIF'e dönüştürmek için ücretsiz çevrimiçi araçlar. Ayarlarınızı seçin ve işlenen dosyayı indirin.",
+  "seo_tool_compress_description": "Videolar?n dosya boyutunu ?evrimi?i k???lt?n. Kaliteyi, ??z?n?rl??? ve codec?i se?ip s?k??t?r?lm?? videoyu indirin.",
+  "seo_tool_audio_description": "Bir videodan ?evrimi?i ses ??kar?n. MP3, AAC, WAV, FLAC veya OGG se?in; bit h?z?n? ve kanallar? ayarlay?n.",
+  "seo_tool_gif_description": "Bir video klibini ?evrimi?i GIF?e d?n??t?r?n. Kare h?z?n? ve ??z?n?rl??? se?in, klibi k?rp?p indirin.",
+  "tool_how_it_works": "Nas?l ?al???r",
+  "tool_step_upload": "Dosyan?z? y?kleyin",
+  "tool_step_configure": "Uygun ayarlar? se?in",
+  "tool_step_download": "Sonucu i?leyip indirin",
+  "tool_file_retention": "Y?klenen dosyalar ve sonu?lar {ttl} dakika sonra silinir.",
+  "tool_open_title": "Arac? a?",
+  "footer_privacy_link": "Gizlilik",
+  "footer_terms_link": "Kullan?m ko?ullar?",
+  "footer_contact_link": "?leti?im",
+  "tool_limit": "S?n?r: dosya ba??na {size} MB ve {duration} dakika.",
+  "noscript": "Nobaj ara?lar?n? kullanmak i?in JavaScript?i etkinle?tirin."
 }

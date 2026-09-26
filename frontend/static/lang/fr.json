@@ -117,5 +117,19 @@
   "public_stats_label": "Statistiques publiques d?utilisation",
   "meta_description": "Des outils gratuits en ligne pour compresser des vidéos, extraire l’audio et convertir des clips vidéo en GIF. Choisissez vos réglages et téléchargez le fichier traité.",
   "og_title": "Nobaj Studio | Outils vidéo, audio et GIF en ligne",
-  "og_description": "Des outils gratuits en ligne pour compresser des vidéos, extraire l’audio et convertir des clips vidéo en GIF. Choisissez vos réglages et téléchargez le fichier traité."
+  "og_description": "Des outils gratuits en ligne pour compresser des vidéos, extraire l’audio et convertir des clips vidéo en GIF. Choisissez vos réglages et téléchargez le fichier traité.",
+  "seo_tool_compress_description": "R?duisez la taille d?une vid?o en ligne. R?glez la qualit?, la r?solution et le codec, puis t?l?chargez la vid?o compress?e.",
+  "seo_tool_audio_description": "Extrayez le son d?une vid?o en ligne. Choisissez MP3, AAC, WAV, FLAC ou OGG, puis r?glez le d?bit et les canaux.",
+  "seo_tool_gif_description": "Convertissez une vid?o en GIF en ligne. Choisissez la fr?quence d?images et la r?solution, puis d?coupez et t?l?chargez le clip.",
+  "tool_how_it_works": "Fonctionnement",
+  "tool_step_upload": "Importez votre fichier",
+  "tool_step_configure": "Choisissez les r?glages adapt?s",
+  "tool_step_download": "Traitez et t?l?chargez le r?sultat",
+  "tool_file_retention": "Les fichiers import?s et les r?sultats sont supprim?s apr?s {ttl} minutes.",
+  "tool_open_title": "Ouvrir cet outil",
+  "footer_privacy_link": "Confidentialit?",
+  "footer_terms_link": "Conditions",
+  "footer_contact_link": "Contact",
+  "tool_limit": "Limite : {size} Mo et {duration} minutes par fichier.",
+  "noscript": "Activez JavaScript pour utiliser les outils Nobaj."
 }

@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" class="dark">
+<html lang="en" dir="ltr" data-lang-version="{{ language_asset_version }}" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ app_name }} — لوحة الإحصائيات</title>
   <link rel="icon" href="/static/img/logo.svg" type="image/svg+xml">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="/static/css/app.min.css?v={{ asset_versions.css }}">
 </head>
 <body class="min-h-screen text-slate-100">
   <header class="site-header">
@@ -68,6 +67,6 @@
     </section>
   </main>
 
-  <script src="/static/js/admin.js"></script>
+  <script defer src="/static/js/admin.js?v={{ asset_versions.admin }}"></script>
 </body>
 </html>

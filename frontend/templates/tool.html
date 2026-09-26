@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="{{ language }}" dir="{{ direction }}" data-lang-version="{{ language_asset_version }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ seo_title }}</title>
+  <meta name="description" content="{{ description }}">
+  <meta name="robots" content="index,follow">
+  {% if google_site_verification %}<meta name="google-site-verification" content="{{ google_site_verification }}">{% endif %}
+  <link rel="canonical" href="{{ canonical_url }}">
+  {% for code, url in alternates %}<link rel="alternate" hreflang="{{ code }}" href="{{ url }}">{% endfor %}
+  <link rel="alternate" hreflang="x-default" href="{{ site_url }}/tools/{{ request.path.rsplit('/', 1)[-1] }}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nobaj">
+  <meta property="og:title" content="{{ seo_title }}">
+  <meta property="og:description" content="{{ description }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:image" content="{{ site_url }}/static/img/og-cover.png">
+  <meta property="og:locale" content="{{ open_graph_locale }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ seo_title }}">
+  <meta name="twitter:description" content="{{ description }}">
+  <meta name="twitter:image" content="{{ site_url }}/static/img/og-cover.png">
+  <link rel="icon" href="/static/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="stylesheet" href="/static/css/app.min.css?v={{ asset_versions.css }}">
+</head>
+<body class="min-h-screen bg-[#090a0d] text-slate-100">
+  <header class="site-header">
+    <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+      <a href="{{ language_path }}" class="font-bold text-white">Nobaj Studio</a>
+      <label class="sr-only" for="language-select">{{ translations.language_label }}</label>
+      <select id="language-select" class="language-trigger" onchange="if(this.value) window.location.href=this.value">
+        {% for code, name, url in language_options %}<option value="{{ url }}"{% if code == language %} selected{% endif %}>{{ name }}</option>{% endfor %}
+      </select>
+    </div>
+  </header>
+  <main class="max-w-3xl mx-auto px-4 py-12 sm:py-20">
+    <nav class="text-sm text-slate-400 mb-8"><a href="{{ language_path }}" class="hover:text-violet-300">Nobaj</a> / {{ tool_name }}</nav>
+    <article class="studio-panel admin-panel p-6 sm:p-10">
+      <p class="section-kicker">Nobaj Studio</p>
+      <h1 class="text-3xl sm:text-5xl font-black text-white mt-3">{{ tool_name }}</h1>
+      <p class="text-slate-300 leading-8 mt-5">{{ description }}</p>
+      <section class="mt-10">
+        <h2 class="text-xl font-bold text-white">{{ translations.tool_how_it_works }}</h2>
+        <ol class="list-decimal list-inside space-y-4 text-slate-300 leading-7 mt-5">
+          <li>{{ translations.tool_step_upload }}</li>
+          <li>{{ translations.tool_step_configure }}
+            <ul class="list-disc list-inside ms-5 mt-2 text-slate-400">
+              {% for setting in setting_names %}<li>{{ setting }}</li>{% endfor %}
+            </ul>
+          </li>
+          <li>{{ translations.tool_step_download }}</li>
+        </ol>
+      </section>
+      <p class="text-sm text-slate-400 mt-8">{{ translations.tool_limit | replace('{size}', max_upload_size_mb|string) | replace('{duration}', max_duration_minutes|string) }}</p>
+      <p class="text-sm text-slate-400 mt-2">{{ translations.tool_file_retention | replace('{ttl}', file_ttl_minutes|string) }}</p>
+      <a href="{{ language_path }}?tool={{ tool.operation }}#workspace" class="btn-violet inline-flex px-6 py-3 rounded-xl mt-8">{{ translations.tool_open_title }}</a>
+    </article>
+    <nav class="flex flex-wrap gap-5 text-sm text-slate-400 mt-8" aria-label="{{ translations.footer_title }}">
+      <a href="{{ '/ar' if language == 'ar' else '' }}/privacy">{{ translations.footer_privacy_link }}</a>
+      <a href="{{ '/ar' if language == 'ar' else '' }}/terms">{{ translations.footer_terms_link }}</a>
+      <a href="{{ '/ar' if language == 'ar' else '' }}/contact">{{ translations.footer_contact_link }}</a>
+    </nav>
+  </main>
+  <script type="application/ld+json">{{ {"@context": "https://schema.org", "@type": "WebPage", "name": seo_title, "description": description, "url": canonical_url, "inLanguage": language, "isPartOf": {"@type": "WebSite", "name": "Nobaj", "url": site_url}} | tojson }}</script>
+</body>
+</html>

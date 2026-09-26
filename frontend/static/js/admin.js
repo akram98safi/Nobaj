@@ -12,11 +12,12 @@ async function loadAdminTranslations() {
   let lang = 'en';
   try { lang = localStorage.getItem('nobaj_lang') || 'en'; } catch (error) {}
   try {
-    const response = await fetch(`/static/lang/${encodeURIComponent(lang)}.json`);
+    const version = document.documentElement.dataset.langVersion || '';
+    const response = await fetch(`/static/lang/${encodeURIComponent(lang)}.json?v=${encodeURIComponent(version)}`);
     if (!response.ok) throw new Error('translation unavailable');
     adminTranslations = await response.json();
   } catch (error) {
-    const response = await fetch('/static/lang/en.json');
+    const response = await fetch(`/static/lang/en.json?v=${encodeURIComponent(document.documentElement.dataset.langVersion || '')}`);
     adminTranslations = response.ok ? await response.json() : {};
   }
   document.documentElement.lang = lang;

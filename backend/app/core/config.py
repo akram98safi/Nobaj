@@ -25,6 +25,7 @@ class Settings(BaseSettings):
     GOOGLE_ADSENSE_CLIENT: str = ""
     GOOGLE_ADSENSE_SLOT_TOP: str = ""
     GOOGLE_ADSENSE_SLOT_BOTTOM: str = ""
+    GOOGLE_SITE_VERIFICATION: str = ""
 
     # Server
     HOST: str = "0.0.0.0"

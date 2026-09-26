@@ -1,7 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Nobaj - Studio Pro Design System
    Quiet, editorial UI: strong hierarchy, restrained color, no decorative noise. */
-
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
 :root {
   --bg-deep: #090b18;
@@ -17,7 +19,7 @@
 }
 
 body {
-  font-family: 'Plus Jakarta Sans', 'IBM Plex Sans Arabic', system-ui, -apple-system, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   background-color: var(--bg-deep);
   color: var(--text-main);
   overflow-x: hidden;
@@ -29,7 +31,7 @@ body {
 
 body[dir="rtl"],
 html[dir="rtl"] body {
-  font-family: 'IBM Plex Sans Arabic', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, sans-serif;
 }
 
 .site-header {

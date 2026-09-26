@@ -4,9 +4,9 @@
  */
 
 // --- Global State ---
-let currentLang = document.documentElement.dataset.pageLanguage || 'ar';
+let currentLang = document.documentElement.dataset.pageLanguage || 'en';
 try {
-  currentLang = document.documentElement.dataset.pageLanguage || localStorage.getItem('nobaj_lang') || 'ar';
+  currentLang = document.documentElement.dataset.pageLanguage || localStorage.getItem('nobaj_lang') || 'en';
 } catch (error) {
   // The app remains usable when browser storage is disabled.
 }
@@ -21,22 +21,6 @@ let processingRequestInFlight = false;
 // --- i18n Localization ---
 let translations = {};
 
-const languageNames = {
-  ar: 'العربية',
-  en: 'English',
-  es: 'Español',
-  fr: 'Français',
-  de: 'Deutsch',
-  pt: 'Português',
-  it: 'Italiano',
-  tr: 'Türkçe',
-  ru: 'Русский',
-  zh: '简体中文',
-  ja: '日本語',
-  ko: '한국어',
-  hi: 'हिन्दी'
-};
-
 const openGraphLocales = {
   ar: 'ar_SA', en: 'en_US', es: 'es_ES', fr: 'fr_FR', de: 'de_DE',
   pt: 'pt_BR', it: 'it_IT', tr: 'tr_TR', ru: 'ru_RU', zh: 'zh_CN',
@@ -45,7 +29,8 @@ const openGraphLocales = {
 
 async function loadTranslations(lang) {
   try {
-    const response = await fetch(`/static/lang/${lang}.json`);
+    const languageVersion = document.documentElement.dataset.langVersion;
+    const response = await fetch(`/static/lang/${lang}.json?v=${encodeURIComponent(languageVersion || '')}`);
     if (!response.ok) throw new Error('Failed to load language file');
     translations = await response.json();
   } catch (e) {
@@ -60,7 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
   setupTabs();
   setupDragAndDrop();
   setupEventListeners();
-  loadPublicStats();
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(loadPublicStats, { timeout: 1200 });
+  } else {
+    window.setTimeout(loadPublicStats, 300);
+  }
 });
 
 function setupLanguage() {
@@ -70,7 +59,7 @@ function setupLanguage() {
   const langMenu = document.getElementById('lang-menu');
 
   async function applyLanguage(lang) {
-    if (!languageNames[lang]) lang = 'en';
+    if (!document.querySelector(`.language-option[data-lang="${lang}"]`)) lang = 'en';
     currentLang = lang;
     try {
       localStorage.setItem('nobaj_lang', lang);
@@ -82,7 +71,8 @@ function setupLanguage() {
     const ogLocale = document.querySelector('meta[property="og:locale"]');
     if (ogLocale) ogLocale.setAttribute('content', openGraphLocales[lang]);
 
-    if (currentLanguageEl) currentLanguageEl.textContent = languageNames[lang];
+    const selectedLanguage = document.querySelector(`.language-option[data-lang="${lang}"]`);
+    if (currentLanguageEl && selectedLanguage) currentLanguageEl.textContent = selectedLanguage.textContent.trim();
     document.querySelectorAll('.language-option').forEach(option => {
       option.classList.toggle('is-selected', option.dataset.lang === lang);
       option.setAttribute('aria-current', option.dataset.lang === lang ? 'true' : 'false');
@@ -208,6 +198,15 @@ function setupTabs() {
       }
     });
   });
+
+  const requestedTool = new URLSearchParams(window.location.search).get('tool');
+  const requestedTab = requestedTool && document.querySelector(`.tab-btn[data-tab="${requestedTool}"]`);
+  if (requestedTab && requestedTool !== 'more') {
+    requestedTab.click();
+    if (window.location.hash === '#workspace') {
+      requestAnimationFrame(() => document.getElementById('workspace')?.scrollIntoView({ behavior: 'smooth' }));
+    }
+  }
 }
 
 function setupDragAndDrop() {

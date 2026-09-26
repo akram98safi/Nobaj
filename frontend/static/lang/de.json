@@ -117,5 +117,19 @@
   "public_stats_label": "?ffentliche Nutzungsstatistik",
   "meta_description": "Kostenlose Online-Tools zum Komprimieren von Videos, Extrahieren von Audio und Umwandeln von Videoclips in GIFs. Einstellungen wählen und die verarbeitete Datei herunterladen.",
   "og_title": "Nobaj Studio | Online-Tools für Video, Audio und GIF",
-  "og_description": "Kostenlose Online-Tools zum Komprimieren von Videos, Extrahieren von Audio und Umwandeln von Videoclips in GIFs. Einstellungen wählen und die verarbeitete Datei herunterladen."
+  "og_description": "Kostenlose Online-Tools zum Komprimieren von Videos, Extrahieren von Audio und Umwandeln von Videoclips in GIFs. Einstellungen wählen und die verarbeitete Datei herunterladen.",
+  "seo_tool_compress_description": "Verringere die Gr??e eines Videos online. Lege Qualit?t, Aufl?sung und Codec fest und lade das komprimierte Video herunter.",
+  "seo_tool_audio_description": "Extrahiere online Audio aus einem Video. W?hle MP3, AAC, WAV, FLAC oder OGG und stelle Bitrate und Kan?le ein.",
+  "seo_tool_gif_description": "Wandle einen Videoclip online in ein GIF um. W?hle Bildrate und Aufl?sung, k?rze den Clip und lade ihn herunter.",
+  "tool_how_it_works": "So funktioniert es",
+  "tool_step_upload": "Datei hochladen",
+  "tool_step_configure": "Passende Einstellungen ausw?hlen",
+  "tool_step_download": "Ergebnis verarbeiten und herunterladen",
+  "tool_file_retention": "Hochgeladene Dateien und Ergebnisse werden nach {ttl} Minuten gel?scht.",
+  "tool_open_title": "Tool ?ffnen",
+  "footer_privacy_link": "Datenschutz",
+  "footer_terms_link": "Nutzungsbedingungen",
+  "footer_contact_link": "Kontakt",
+  "tool_limit": "Maximum: {size} MB und {duration} Minuten pro Datei.",
+  "noscript": "Aktiviere JavaScript, um die Nobaj-Tools zu verwenden."
 }

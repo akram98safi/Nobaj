@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="{{ page_language }}" dir="{{ 'rtl' if page_language == 'ar' else 'ltr' }}" data-page-language="{{ page_language }}" class="dark">
+<html lang="{{ page_language }}" dir="{{ 'rtl' if page_language == 'ar' else 'ltr' }}" data-page-language="{{ page_language }}" data-lang-version="{{ language_asset_version }}" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-i18n="page_title">{{ seo_meta.page_title }}</title>
+  <title data-i18n="page_title">{{ translations['page_title']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</title>
 
   <!-- SEO Core Meta Tags -->
   <meta name="description" data-i18n-content="meta_description" content="{{ seo_meta.meta_description }}">
   <meta name="author" content="Nobaj Studio">
+  {% if google_site_verification %}<meta name="google-site-verification" content="{{ google_site_verification }}">{% endif %}
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="theme-color" content="#8b5cf6">
   <meta name="color-scheme" content="dark">
@@ -19,6 +20,7 @@
   {% for language, url in language_alternates %}
   <link rel="alternate" hreflang="{{ language }}" href="{{ url }}">
   {% endfor %}
+  <link rel="alternate" hreflang="x-default" href="{{ site_url }}/">
 
   <!-- Open Graph (Facebook, LinkedIn, WhatsApp, Telegram) -->
   <meta property="og:type" content="website">
@@ -42,10 +44,6 @@
   <link rel="icon" href="/static/img/logo.svg" type="image/svg+xml">
   <link rel="icon" href="/static/img/favicon-32.png" sizes="32x32" type="image/png">
   <link rel="apple-touch-icon" href="/static/img/apple-touch-icon.png">
-
-  <!-- DNS Prefetch & Preconnect -->
-  <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
-  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin>
 
   <!-- JSON-LD Structured Data -->
   <script type="application/ld+json">
@@ -78,41 +76,7 @@
   }
   </script>
 
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            obsidian: {
-              950: '#090a0d',
-              900: '#12151c',
-              850: '#181c26',
-              800: '#202633',
-              700: '#333c4f',
-            },
-            violet: {
-              300: '#c4b5fd',
-              400: '#a78bfa',
-              500: '#8b5cf6',
-              600: '#7c3aed',
-              700: '#6d28d9',
-            },
-            titanium: {
-              100: '#f8fafc',
-              200: '#e2e8f0',
-              300: '#cbd5e1',
-              400: '#94a3b8',
-              500: '#64748b',
-            }
-          }
-        }
-      }
-    }
-  </script>
-  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="/static/css/app.min.css?v={{ asset_versions.css }}">
 </head>
 <body class="min-h-screen text-slate-100 flex flex-col justify-between selection:bg-violet-500/30 selection:text-violet-200">
 
@@ -129,34 +93,24 @@
         <!-- Live System Status -->
         <div class="hidden sm:flex items-center gap-2 text-xs font-medium text-slate-400">
           <span class="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)] animate-pulse"></span>
-          <span class="font-mono text-[11px]" data-i18n="engine_ready">ENGINE READY</span>
+          <span class="font-mono text-[11px]" data-i18n="engine_ready">{{ translations['engine_ready']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
         </div>
 
         <!-- Language menu -->
         <div class="language-menu relative">
           <button id="lang-toggle" type="button" class="language-trigger" aria-expanded="false" aria-haspopup="true">
             <span class="language-globe" aria-hidden="true">◎</span>
-            <span id="current-language">العربية</span>
+            <span id="current-language">{{ language_name }}</span>
             <svg class="w-3.5 h-3.5 text-slate-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
               <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.51a.75.75 0 01-1.08 0l-4.25-4.51a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
             </svg>
           </button>
           <div id="lang-menu" class="language-popover hidden" role="menu" aria-label="Language">
-            <div class="language-popover-heading" data-i18n="language_label">Language</div>
+            <div class="language-popover-heading" data-i18n="language_label">{{ translations['language_label']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</div>
             <div class="language-grid">
-              <button type="button" class="language-option" data-lang="ar" role="menuitem">العربية</button>
-              <button type="button" class="language-option" data-lang="en" role="menuitem">English</button>
-              <button type="button" class="language-option" data-lang="es" role="menuitem">Español</button>
-              <button type="button" class="language-option" data-lang="fr" role="menuitem">Français</button>
-              <button type="button" class="language-option" data-lang="de" role="menuitem">Deutsch</button>
-              <button type="button" class="language-option" data-lang="pt" role="menuitem">Português</button>
-              <button type="button" class="language-option" data-lang="it" role="menuitem">Italiano</button>
-              <button type="button" class="language-option" data-lang="tr" role="menuitem">Türkçe</button>
-              <button type="button" class="language-option" data-lang="ru" role="menuitem">Русский</button>
-              <button type="button" class="language-option" data-lang="zh" role="menuitem">简体中文</button>
-              <button type="button" class="language-option" data-lang="ja" role="menuitem">日本語</button>
-              <button type="button" class="language-option" data-lang="ko" role="menuitem">한국어</button>
-              <button type="button" class="language-option" data-lang="hi" role="menuitem">हिन्दी</button>
+              {% for code, name in language_options %}
+              <button type="button" class="language-option" data-lang="{{ code }}" role="menuitem"{% if code == page_language %} aria-current="true"{% endif %}>{{ name }}</button>
+              {% endfor %}
             </div>
           </div>
         </div>
@@ -165,71 +119,67 @@
   </header>
 
   <!-- Main Workspace Container -->
-  <main class="flex-grow max-w-5xl mx-auto w-full px-4 sm:px-6 py-8 sm:py-12 space-y-9">
+  <main id="workspace" class="flex-grow max-w-5xl mx-auto w-full px-4 sm:px-6 py-8 sm:py-12 space-y-9">
 
     <!-- Hero Title & Architecture Pills -->
     <div class="text-center space-y-4 max-w-2xl mx-auto hero-block">
       <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-xs font-semibold tracking-wide">
         <span class="hero-mark" aria-hidden="true">N</span>
-        <span data-i18n="tagline_pill">منصة معالجة الوسائط الاحترافية</span>
+        <span data-i18n="tagline_pill">{{ translations['tagline_pill']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
       </div>
 
-      <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight" data-i18n="tagline">
-        استوديو نُبَاج لمعالجة الفيديو والصوت
-      </h1>
+      <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight" data-i18n="tagline">{{ translations['tagline']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</h1>
       
-      <p class="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-lg mx-auto" data-i18n="subtitle">
-        أدوات متطورة لضغط الفيديو، استخراج الصوت عالي النقاء، وتحويل GIF فائق الجودة مباشرة على السيرفر.
-      </p>
+      <p class="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-lg mx-auto" data-i18n="subtitle">{{ translations['subtitle']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</p>
 
       <!-- Trust Badges -->
       <div class="pt-2 flex flex-wrap justify-center items-center gap-3 sm:gap-4 text-xs text-slate-400">
         <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/[0.05]">
-          <span class="text-violet-400">✓</span> <span data-i18n="trust_ffmpeg">معالجة FFmpeg مباشرة</span>
+          <span class="text-violet-400">✓</span> <span data-i18n="trust_ffmpeg">{{ translations['trust_ffmpeg']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
         </span>
         <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/[0.05]">
-          <span class="text-violet-400">✓</span> <span data-i18n="trust_privacy">خصوصية تامة وحذف آلي</span>
+          <span class="text-violet-400">✓</span> <span data-i18n="trust_privacy">{{ translations['trust_privacy']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
         </span>
         <span class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white/[0.03] border border-white/[0.05]">
-          <span class="text-violet-400">✓</span> <span data-i18n="trust_quality">الحفاظ على أعلى نقاء</span>
+          <span class="text-violet-400">✓</span> <span data-i18n="trust_quality">{{ translations['trust_quality']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
         </span>
       </div>
     </div>
 
     <!-- Public, first-party usage metrics -->
-    <section id="public-stats" class="stats-strip" aria-label="" data-i18n-aria-label="public_stats_label">
+    <section id="public-stats" class="stats-strip" aria-label="{{ translations['public_stats_label'] }}" data-i18n-aria-label="public_stats_label">
       <div class="stats-heading">
-        <span class="section-kicker" data-i18n="stats_kicker">Nobaj in numbers</span>
-        <span class="stats-live" data-i18n="stats_live">Live totals</span>
+        <span class="section-kicker" data-i18n="stats_kicker">{{ translations['stats_kicker']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
+        <span class="stats-live" data-i18n="stats_live">{{ translations['stats_live']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
       </div>
       <div class="stats-grid">
         <div class="stat-item">
           <strong id="stat-total-visitors">0</strong>
-          <span data-i18n="stat_total_visitors">Total visitors</span>
+          <span data-i18n="stat_total_visitors">{{ translations['stat_total_visitors']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
         </div>
         <div class="stat-item">
           <strong id="stat-today-visitors">0</strong>
-          <span data-i18n="stat_today_visitors">Visitors today</span>
+          <span data-i18n="stat_today_visitors">{{ translations['stat_today_visitors']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
         </div>
         <div class="stat-item">
           <strong id="stat-completed-operations">0</strong>
-          <span data-i18n="stat_completed_operations">Completed operations</span>
+          <span data-i18n="stat_completed_operations">{{ translations['stat_completed_operations']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
         </div>
         <div class="stat-item">
           <strong id="stat-processed-size">0 MB</strong>
-          <span data-i18n="stat_processed_size">Media processed</span>
+          <span data-i18n="stat_processed_size">{{ translations['stat_processed_size']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
         </div>
       </div>
     </section>
 
     <!-- Reserved responsive ad space. AdSense is enabled only after IDs are configured. -->
     {% if adsense_client and adsense_slot_top %}
-    <div class="ad-slot ad-slot-live" aria-label="" data-i18n-aria-label="ad_space">
+    <div class="ad-slot ad-slot-live" aria-label="{{ translations['ad_space'] }}" data-i18n-aria-label="ad_space">
       <ins class="adsbygoogle" style="display:block" data-ad-client="{{ adsense_client }}" data-ad-slot="{{ adsense_slot_top }}" data-ad-format="auto" data-full-width-responsive="true"></ins>
     </div>
     {% else %}
-    <div class="ad-slot ad-slot-placeholder" aria-label="" data-i18n-aria-label="ad_space">
-      <span data-i18n="ad_space">Advertising space</span>
+    <div class="ad-slot ad-slot-placeholder" aria-label="{{ translations['ad_space'] }}" data-i18n-aria-label="ad_space">
+      <span data-i18n="ad_space">{{ translations['ad_space']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
     </div>
     {% endif %}
 
@@ -238,19 +188,19 @@
       <div class="tab-switcher inline-flex p-1.5 rounded-2xl">
         <button class="tab-btn active-tab px-5 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2.5" data-tab="compress">
           <span>🎬</span>
-          <span data-i18n="tab_compress">ضغط الفيديو</span>
+          <span data-i18n="tab_compress">{{ translations['tab_compress']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
         </button>
         <button class="tab-btn px-5 py-2.5 rounded-xl font-bold text-sm text-slate-400 hover:text-white flex items-center gap-2.5" data-tab="audio">
           <span>🎙️</span>
-          <span data-i18n="tab_audio">استخراج الصوت</span>
+          <span data-i18n="tab_audio">{{ translations['tab_audio']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
         </button>
         <button class="tab-btn px-5 py-2.5 rounded-xl font-bold text-sm text-slate-400 hover:text-white flex items-center gap-2.5" data-tab="gif">
           <span>🎞️</span>
-          <span data-i18n="tab_gif">تحويل إلى GIF</span>
+          <span data-i18n="tab_gif">{{ translations['tab_gif']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
         </button>
         <button class="tab-btn px-4 py-2.5 rounded-xl font-medium text-xs text-slate-500 cursor-not-allowed hidden md:flex items-center gap-1.5" data-tab="more">
           <span>✨</span>
-          <span data-i18n="tab_more">المزيد قريباً</span>
+          <span data-i18n="tab_more">{{ translations['tab_more']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
         </button>
       </div>
     </div>
@@ -267,12 +217,8 @@
         </div>
 
         <div class="space-y-1.5">
-          <h3 class="text-lg sm:text-xl font-bold text-slate-100" data-i18n="drop_title">
-            اسحب وأفلت الفيديو هنا
-          </h3>
-          <p class="text-xs sm:text-sm text-slate-400" data-i18n="drop_desc">
-            أو اضغط لتصفح الملفات من جهازك
-          </p>
+          <h3 class="text-lg sm:text-xl font-bold text-slate-100" data-i18n="drop_title">{{ translations['drop_title']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</h3>
+          <p class="text-xs sm:text-sm text-slate-400" data-i18n="drop_desc">{{ translations['drop_desc']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</p>
         </div>
 
         <div class="pt-2 flex flex-wrap justify-center gap-1.5 text-[11px] font-mono text-slate-400">
@@ -281,8 +227,8 @@
           <span class="px-2 py-0.5 rounded bg-black/40 border border-white/[0.06]">MOV</span>
           <span class="px-2 py-0.5 rounded bg-black/40 border border-white/[0.06]">WebM</span>
           <span class="px-2 py-0.5 rounded bg-black/40 border border-white/[0.06]">AVI</span>
-          <span class="px-2 py-0.5 rounded bg-violet-500/10 text-violet-300 border border-violet-500/20" data-i18n="upload_limit" data-i18n-size="{{ max_upload_size_mb }}">Up to {{ max_upload_size_mb }} MB</span>
-          <span class="w-full pt-1 text-slate-500" data-i18n="drop_hint">Choose a media file to preview its details.</span>
+          <span class="px-2 py-0.5 rounded bg-violet-500/10 text-violet-300 border border-violet-500/20" data-i18n="upload_limit" data-i18n-size="{{ max_upload_size_mb }}">{{ translations['upload_limit']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
+          <span class="w-full pt-1 text-slate-500" data-i18n="drop_hint">{{ translations['drop_hint']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
         </div>
       </div>
     </div>
@@ -292,7 +238,7 @@
       <div class="flex justify-between items-center text-xs font-semibold text-slate-300">
         <span class="flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-violet-400 animate-ping"></span>
-          <span data-i18n="uploading">جاري رفع الملف وفحصه...</span>
+          <span data-i18n="uploading">{{ translations['uploading']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
         </span>
       </div>
       <div class="progress-track w-full rounded-full h-2 overflow-hidden">
@@ -307,31 +253,31 @@
       <div class="studio-panel p-6 sm:p-7 rounded-3xl grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
         <!-- Cinema Monitor -->
         <div class="lg:col-span-6 overflow-hidden rounded-2xl bg-black aspect-video flex items-center justify-center border border-white/[0.08] shadow-inner">
-          <video id="video-preview-player" aria-label="" data-i18n-aria-label="video_preview" controls class="w-full h-full object-contain"></video>
+          <video id="video-preview-player" aria-label="{{ translations['video_preview'] }}" data-i18n-aria-label="video_preview" controls class="w-full h-full object-contain"></video>
         </div>
 
         <!-- Telemetry Cards -->
-        <div class="lg:col-span-6 space-y-4" aria-label="" data-i18n-aria-label="file_info">
+        <div class="lg:col-span-6 space-y-4" aria-label="{{ translations['file_info'] }}" data-i18n-aria-label="file_info">
           <div class="border-b border-white/[0.08] pb-3">
-            <span class="text-[11px] font-mono text-violet-400 uppercase tracking-wider block" data-i18n="source_media">SOURCE MEDIA</span>
+            <span class="text-[11px] font-mono text-violet-400 uppercase tracking-wider block" data-i18n="source_media">{{ translations['source_media']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
             <h4 id="meta-filename" class="text-base font-bold text-white truncate max-w-md">filename.mp4</h4>
           </div>
           
           <div class="grid grid-cols-2 gap-3 text-xs">
             <div class="p-3 rounded-xl bg-obsidian-950/80 border border-white/[0.06]">
-              <span class="text-slate-400 block text-[11px]" data-i18n="size">الحجم الأصلي</span>
+              <span class="text-slate-400 block text-[11px]" data-i18n="size">{{ translations['size']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
               <span id="meta-size" class="font-bold font-mono text-slate-200 text-sm">-</span>
             </div>
             <div class="p-3 rounded-xl bg-obsidian-950/80 border border-white/[0.06]">
-              <span class="text-slate-400 block text-[11px]" data-i18n="duration">المدة</span>
+              <span class="text-slate-400 block text-[11px]" data-i18n="duration">{{ translations['duration']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
               <span id="meta-duration" class="font-bold font-mono text-slate-200 text-sm">-</span>
             </div>
             <div class="p-3 rounded-xl bg-obsidian-950/80 border border-white/[0.06]">
-              <span class="text-slate-400 block text-[11px]" data-i18n="resolution">الأبعاد</span>
+              <span class="text-slate-400 block text-[11px]" data-i18n="resolution">{{ translations['resolution']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
               <span id="meta-resolution" class="font-bold font-mono text-slate-200 text-sm">-</span>
             </div>
             <div class="p-3 rounded-xl bg-obsidian-950/80 border border-white/[0.06]">
-              <span class="text-slate-400 block text-[11px]" data-i18n="codec">الكوديك</span>
+              <span class="text-slate-400 block text-[11px]" data-i18n="codec">{{ translations['codec']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
               <span id="meta-codec" class="font-bold font-mono text-slate-200 text-sm">-</span>
             </div>
           </div>
@@ -346,19 +292,19 @@
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
             <!-- Quality level -->
             <div class="space-y-2">
-              <label class="block text-xs font-bold text-slate-300" data-i18n="comp_level">مستوى الضغط</label>
+              <label class="block text-xs font-bold text-slate-300" data-i18n="comp_level">{{ translations['comp_level']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</label>
               <select id="comp-quality-select" class="w-full px-3.5 py-2.5 rounded-xl text-sm font-medium outline-none">
-                <option value="medium" selected data-i18n="comp_balanced">متوازن (موصى به - توفير 50-60%)</option>
-                <option value="low" data-i18n="comp_aggressive">ضغط فائق (توفير أقصى 70-80%)</option>
-                <option value="high" data-i18n="comp_quality">جودة سينمائية (توفير طفيف 20-30%)</option>
+                <option value="medium" selected data-i18n="comp_balanced">{{ translations['comp_balanced']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
+                <option value="low" data-i18n="comp_aggressive">{{ translations['comp_aggressive']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
+                <option value="high" data-i18n="comp_quality">{{ translations['comp_quality']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
               </select>
             </div>
 
             <!-- Resolution -->
             <div class="space-y-2">
-              <label class="block text-xs font-bold text-slate-300" data-i18n="comp_res">تغيير دقة الفيديو</label>
+              <label class="block text-xs font-bold text-slate-300" data-i18n="comp_res">{{ translations['comp_res']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</label>
               <select id="comp-res-select" class="w-full px-3.5 py-2.5 rounded-xl text-sm font-medium outline-none">
-                <option value="original" selected data-i18n="res_keep">الحفاظ على الدقة الأصلية</option>
+                <option value="original" selected data-i18n="res_keep">{{ translations['res_keep']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
                 <option value="1080p">1080p Full HD</option>
                 <option value="720p">720p HD</option>
                 <option value="480p">480p SD</option>
@@ -368,17 +314,17 @@
 
             <!-- Codec -->
             <div class="space-y-2">
-              <label class="block text-xs font-bold text-slate-300" data-i18n="comp_codec">ترميز الفيديو (Codec)</label>
+              <label class="block text-xs font-bold text-slate-300" data-i18n="comp_codec">{{ translations['comp_codec']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</label>
               <select id="comp-codec-select" class="w-full px-3.5 py-2.5 rounded-xl text-sm font-medium outline-none">
-                <option value="h264" selected data-i18n="codec_h264">H.264 (توافق عالمي مع كافة الأجهزة)</option>
-                <option value="h265" data-i18n="codec_h265">H.265 / HEVC (ضغط مضاعف متقدم)</option>
-                <option value="vp9" data-i18n="codec_vp9">VP9 (معيار الويب WebM)</option>
+                <option value="h264" selected data-i18n="codec_h264">{{ translations['codec_h264']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
+                <option value="h265" data-i18n="codec_h265">{{ translations['codec_h265']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
+                <option value="vp9" data-i18n="codec_vp9">{{ translations['codec_vp9']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
               </select>
             </div>
           </div>
 
           <button id="btn-start-compress" class="btn-violet w-full py-4 rounded-xl text-base flex items-center justify-center gap-2">
-            <span data-i18n="comp_btn">بدء معالجة وضغط الفيديو ⚡</span>
+            <span data-i18n="comp_btn">{{ translations['comp_btn']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
           </button>
         </div>
 
@@ -387,40 +333,40 @@
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
             <!-- Audio Format -->
             <div class="space-y-2">
-              <label class="block text-xs font-bold text-slate-300" data-i18n="audio_format">صيغة الصوت المستخرج</label>
+              <label class="block text-xs font-bold text-slate-300" data-i18n="audio_format">{{ translations['audio_format']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</label>
               <select id="audio-format-select" class="w-full px-3.5 py-2.5 rounded-xl text-sm font-medium outline-none">
-                <option value="mp3" selected data-i18n="format_mp3">MP3 (توافق قياسي)</option>
-                <option value="aac" data-i18n="format_aac">AAC (جودة عالية)</option>
-                <option value="wav" data-i18n="format_wav">WAV (أصلي غير مضغوط)</option>
-                <option value="flac" data-i18n="format_flac">FLAC (نقاء استوديو فائق)</option>
-                <option value="ogg" data-i18n="format_ogg">OGG Vorbis</option>
+                <option value="mp3" selected data-i18n="format_mp3">{{ translations['format_mp3']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
+                <option value="aac" data-i18n="format_aac">{{ translations['format_aac']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
+                <option value="wav" data-i18n="format_wav">{{ translations['format_wav']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
+                <option value="flac" data-i18n="format_flac">{{ translations['format_flac']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
+                <option value="ogg" data-i18n="format_ogg">{{ translations['format_ogg']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
               </select>
             </div>
 
             <!-- Bitrate -->
             <div class="space-y-2">
-              <label class="block text-xs font-bold text-slate-300" data-i18n="audio_bitrate">معدل البت (الجودة)</label>
+              <label class="block text-xs font-bold text-slate-300" data-i18n="audio_bitrate">{{ translations['audio_bitrate']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</label>
               <select id="audio-bitrate-select" class="w-full px-3.5 py-2.5 rounded-xl text-sm font-medium outline-none">
-                <option value="320k" data-i18n="bitrate_320">320 kbps (جودة استوديو قصوى)</option>
-                <option value="256k" data-i18n="bitrate_256">256 kbps (عالية جداً)</option>
-                <option value="192k" selected data-i18n="bitrate_192">192 kbps (جودة قياسية متوازنة)</option>
-                <option value="128k" data-i18n="bitrate_128">128 kbps (حجم خفيف)</option>
+                <option value="320k" data-i18n="bitrate_320">{{ translations['bitrate_320']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
+                <option value="256k" data-i18n="bitrate_256">{{ translations['bitrate_256']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
+                <option value="192k" selected data-i18n="bitrate_192">{{ translations['bitrate_192']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
+                <option value="128k" data-i18n="bitrate_128">{{ translations['bitrate_128']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
               </select>
             </div>
 
             <!-- Channels -->
             <div class="space-y-2">
-              <label class="block text-xs font-bold text-slate-300" data-i18n="audio_channels">القنوات الصوتية</label>
+              <label class="block text-xs font-bold text-slate-300" data-i18n="audio_channels">{{ translations['audio_channels']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</label>
               <select id="audio-channels-select" class="w-full px-3.5 py-2.5 rounded-xl text-sm font-medium outline-none">
-                <option value="original" selected data-i18n="channels_original">الأصلية (تلقائي)</option>
-                <option value="stereo" data-i18n="audio_ch_stereo">ستيريو (Stereo - مجسم)</option>
-                <option value="mono" data-i18n="audio_ch_mono">مونو (Mono - قناة واحدة)</option>
+                <option value="original" selected data-i18n="channels_original">{{ translations['channels_original']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
+                <option value="stereo" data-i18n="audio_ch_stereo">{{ translations['audio_ch_stereo']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
+                <option value="mono" data-i18n="audio_ch_mono">{{ translations['audio_ch_mono']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
               </select>
             </div>
           </div>
 
           <button id="btn-start-audio" class="btn-violet w-full py-4 rounded-xl text-base flex items-center justify-center gap-2">
-            <span data-i18n="audio_btn">بدء استخراج المقطع الصوتي 🎙️</span>
+            <span data-i18n="audio_btn">{{ translations['audio_btn']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
           </button>
         </div>
 
@@ -429,42 +375,42 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             <!-- FPS -->
             <div class="space-y-2">
-              <label class="block text-xs font-bold text-slate-300" data-i18n="gif_fps">معدل الإطارات (FPS)</label>
+              <label class="block text-xs font-bold text-slate-300" data-i18n="gif_fps">{{ translations['gif_fps']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</label>
               <select id="gif-fps-select" class="w-full px-3.5 py-2.5 rounded-xl text-sm font-medium outline-none">
-                <option value="10" data-i18n="fps_10">10 FPS (حجم صغير جداً)</option>
-                <option value="15" selected data-i18n="fps_15">15 FPS (متوازن وسلس)</option>
-                <option value="20" data-i18n="fps_20">20 FPS (سلاسة سينمائية)</option>
-                <option value="24" data-i18n="fps_24">24 FPS (أقصى نعومة حركة)</option>
+                <option value="10" data-i18n="fps_10">{{ translations['fps_10']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
+                <option value="15" selected data-i18n="fps_15">{{ translations['fps_15']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
+                <option value="20" data-i18n="fps_20">{{ translations['fps_20']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
+                <option value="24" data-i18n="fps_24">{{ translations['fps_24']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
               </select>
             </div>
 
             <!-- Resolution -->
             <div class="space-y-2">
-              <label class="block text-xs font-bold text-slate-300" data-i18n="gif_res">أبعاد الـ GIF</label>
+              <label class="block text-xs font-bold text-slate-300" data-i18n="gif_res">{{ translations['gif_res']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</label>
               <select id="gif-res-select" class="w-full px-3.5 py-2.5 rounded-xl text-sm font-medium outline-none">
-                <option value="320" data-i18n="gif_res_320">320px (Tiny - خفيف)</option>
-                <option value="480" selected data-i18n="gif_res_480">480px (Standard - قياسي)</option>
-                <option value="640" data-i18n="gif_res_640">640px (Medium - متوسط)</option>
-                <option value="720" data-i18n="gif_res_720">720px (HD - عالي الوضوح)</option>
-                <option value="original" data-i18n="gif_res_original">Original (الأصلية)</option>
+                <option value="320" data-i18n="gif_res_320">{{ translations['gif_res_320']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
+                <option value="480" selected data-i18n="gif_res_480">{{ translations['gif_res_480']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
+                <option value="640" data-i18n="gif_res_640">{{ translations['gif_res_640']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
+                <option value="720" data-i18n="gif_res_720">{{ translations['gif_res_720']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
+                <option value="original" data-i18n="gif_res_original">{{ translations['gif_res_original']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</option>
               </select>
             </div>
 
             <!-- Trim Start -->
             <div class="space-y-2">
-              <label class="block text-xs font-bold text-slate-300" data-i18n="gif_start">نقطة البداية (ثواني)</label>
+              <label class="block text-xs font-bold text-slate-300" data-i18n="gif_start">{{ translations['gif_start']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</label>
               <input type="number" id="gif-trim-start" step="0.5" min="0" value="0" class="w-full px-3.5 py-2.5 rounded-xl text-sm font-medium outline-none">
             </div>
 
             <!-- Trim End -->
             <div class="space-y-2">
-              <label class="block text-xs font-bold text-slate-300" data-i18n="gif_end">نقطة النهاية (ثواني)</label>
+              <label class="block text-xs font-bold text-slate-300" data-i18n="gif_end">{{ translations['gif_end']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</label>
               <input type="number" id="gif-trim-end" step="0.5" min="0" value="5" class="w-full px-3.5 py-2.5 rounded-xl text-sm font-medium outline-none">
             </div>
           </div>
 
           <button id="btn-start-gif" class="btn-violet w-full py-4 rounded-xl text-base flex items-center justify-center gap-2">
-            <span data-i18n="gif_btn">إنشاء الـ GIF عالي الدقة 🎞️</span>
+            <span data-i18n="gif_btn">{{ translations['gif_btn']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
           </button>
         </div>
 
@@ -475,7 +421,7 @@
         <div class="space-y-2">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-violet-500/10 border border-violet-500/20 text-violet-400 text-xs font-mono">
             <span class="w-2 h-2 rounded-full bg-violet-400 animate-ping"></span>
-            <span id="job-status-text" data-i18n="status_processing">جاري المعالجة بواسطة السيرفر...</span>
+            <span id="job-status-text" data-i18n="status_processing">{{ translations['status_processing']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
           </div>
 
           <div class="flex justify-center items-center gap-6 text-xs text-slate-400 font-mono pt-1">
@@ -489,9 +435,7 @@
         </div>
 
         <div class="flex justify-between items-center text-xs text-slate-400 px-1">
-          <button id="btn-cancel-job" class="text-rose-400 hover:text-rose-300 transition-colors font-semibold" data-i18n="cancel_btn">
-            إلغاء العملية
-          </button>
+          <button id="btn-cancel-job" class="text-rose-400 hover:text-rose-300 transition-colors font-semibold" data-i18n="cancel_btn">{{ translations['cancel_btn']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</button>
           <span id="job-progress-percent" class="font-extrabold text-violet-400 text-sm font-mono">0%</span>
         </div>
       </div>
@@ -502,7 +446,7 @@
       </div>
       {% else %}
       <div class="ad-slot ad-slot-placeholder" aria-label="Advertisement">
-        <span data-i18n="ad_space">Advertising space</span>
+        <span data-i18n="ad_space">{{ translations['ad_space']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
       </div>
       {% endif %}
 
@@ -513,13 +457,13 @@
         </div>
 
         <div class="space-y-1">
-          <h3 class="text-2xl font-black text-white" data-i18n="ready_title">تمت المعالجة بنجاح!</h3>
+          <h3 class="text-2xl font-black text-white" data-i18n="ready_title">{{ translations['ready_title']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</h3>
           <p id="result-filename" class="text-xs text-slate-400 truncate max-w-sm mx-auto font-mono"></p>
         </div>
 
         <!-- Comparative Metrics -->
         <div class="inline-flex items-center gap-4 px-6 py-3 rounded-2xl bg-obsidian-950 border border-white/[0.08] text-sm">
-          <span class="text-slate-400" data-i18n="new_size">الحجم النهائي:</span>
+          <span class="text-slate-400" data-i18n="new_size">{{ translations['new_size']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
           <span id="result-new-size" class="font-bold text-white font-mono">-</span>
           <span id="result-savings-badge" class="px-2.5 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 font-bold text-xs font-mono">
             -
@@ -531,11 +475,9 @@
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
             </svg>
-            <span data-i18n="download_btn">تحميل الملف الآن</span>
+            <span data-i18n="download_btn">{{ translations['download_btn']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
           </a>
-          <button id="btn-convert-another" class="btn-ghost px-6 py-3.5 rounded-xl text-sm" data-i18n="convert_another">
-            معالجة ملف آخر
-          </button>
+          <button id="btn-convert-another" class="btn-ghost px-6 py-3.5 rounded-xl text-sm" data-i18n="convert_another">{{ translations['convert_another']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</button>
         </div>
       </div>
 
@@ -546,20 +488,27 @@
   <!-- Studio Footer -->
   <footer class="border-t border-white/[0.06] bg-[#090a0d] py-8 text-center text-xs text-slate-500 space-y-4">
     <div class="max-w-4xl mx-auto px-4 space-y-3">
-      <p class="font-medium" data-i18n="footer_title">Nobaj Media Studio • Server-side FFmpeg Engine</p>
-      <p class="text-[11px] text-slate-600" data-i18n="footer_privacy" data-i18n-ttl="{{ file_ttl_minutes }}">
-        يتم تنظيف وحذف الملفات المؤقتة والنهائية آلياً بعد {{ file_ttl_minutes }} دقيقة لضمان الخصوصية التامة.
-      </p>
+      <p class="font-medium" data-i18n="footer_title">{{ translations['footer_title']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</p>
+      <p class="text-[11px] text-slate-600" data-i18n="footer_privacy" data-i18n-ttl="{{ file_ttl_minutes }}">{{ translations['footer_privacy']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</p>
       <p class="text-[10px] text-slate-700">&copy; {{ current_year }} Nobaj.com</p>
+      <nav class="flex flex-wrap justify-center gap-4" aria-label="{{ translations.footer_title }}">
+        <a href="{{ '/ar' if page_language == 'ar' else '' }}/tools/video-compressor" class="hover:text-violet-300">{{ translations.tab_compress }}</a>
+        <a href="{{ '/ar' if page_language == 'ar' else '' }}/tools/audio-extractor" class="hover:text-violet-300">{{ translations.tab_audio }}</a>
+        <a href="{{ '/ar' if page_language == 'ar' else '' }}/tools/video-to-gif" class="hover:text-violet-300">{{ translations.tab_gif }}</a>
+        <a href="{{ '/ar' if page_language == 'ar' else '' }}/privacy" data-i18n="footer_privacy_link" class="hover:text-violet-300">{{ translations['footer_privacy_link']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</a>
+        <a href="{{ '/ar' if page_language == 'ar' else '' }}/terms" data-i18n="footer_terms_link" class="hover:text-violet-300">{{ translations['footer_terms_link']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</a>
+        <a href="{{ '/ar' if page_language == 'ar' else '' }}/contact" data-i18n="footer_contact_link" class="hover:text-violet-300">{{ translations['footer_contact_link']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</a>
+        <a href="https://github.com/akram98safi/Nobaj/issues" target="_blank" rel="noopener noreferrer" class="hover:text-violet-300">GitHub</a>
+      </nav>
     </div>
   </footer>
 
   <noscript>
-    <p>فعّل JavaScript لاستخدام أدوات نُباج.</p>
+    <p data-i18n="noscript">{{ translations['noscript']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</p>
   </noscript>
 
   <!-- Application JS Bundle -->
-  <script src="/static/js/app.js"></script>
+  <script defer src="/static/js/app.js?v={{ asset_versions.app }}"></script>
   {% if adsense_client %}
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ adsense_client }}" crossorigin="anonymous"></script>
   <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
