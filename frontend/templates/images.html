@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="{{ language }}" dir="{{ direction }}" data-page-language="{{ language }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ t.image_page_title }}</title>
+  <meta name="description" content="{{ t.image_page_description }}">
+  <meta name="robots" content="index,follow">
+  {% if google_site_verification %}<meta name="google-site-verification" content="{{ google_site_verification }}">{% endif %}
+  <link rel="canonical" href="{{ canonical_url }}">
+  {% for code, url in alternates %}<link rel="alternate" hreflang="{{ code }}" href="{{ url }}">{% endfor %}
+  <link rel="alternate" hreflang="x-default" href="{{ site_url }}/tools/image-tools">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Nobaj">
+  <meta property="og:title" content="{{ t.image_page_title }}">
+  <meta property="og:description" content="{{ t.image_page_description }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:image" content="{{ site_url }}/static/img/og-cover.png">
+  <meta property="og:locale" content="{{ open_graph_locale }}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ t.image_page_title }}">
+  <meta name="twitter:description" content="{{ t.image_page_description }}">
+  <meta name="twitter:image" content="{{ site_url }}/static/img/og-cover.png">
+  <link rel="icon" href="/static/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="stylesheet" href="/static/css/app.min.css?v={{ asset_versions.css }}">
+</head>
+<body class="min-h-screen bg-[#090a0d] text-slate-100 flex flex-col">
+  <header class="site-header">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <a href="{{ language_path }}" class="font-bold text-white flex items-center gap-2">
+        <img src="/static/img/logo.svg" alt="Nobaj Studio" class="h-8 w-auto">
+      </a>
+      <label class="sr-only" for="image-language">{{ t.language_label }}</label>
+      <select id="image-language" class="language-trigger" aria-label="{{ t.language_label }}">
+        {% for code, name, url in language_options %}<option value="{{ url }}"{% if code == language %} selected{% endif %}>{{ name }}</option>{% endfor %}
+      </select>
+    </div>
+  </header>
+
+  <main class="max-w-5xl w-full mx-auto px-4 sm:px-6 py-10 sm:py-16 flex-1">
+    <nav class="text-sm text-slate-400 mb-6"><a href="{{ language_path }}" class="hover:text-violet-300">Nobaj</a> / {{ t.tab_images }}</nav>
+    <section class="text-center max-w-3xl mx-auto mb-10">
+      <p class="section-kicker">Nobaj Studio</p>
+      <h1 class="text-3xl sm:text-5xl font-black text-white mt-3">{{ t.image_heading }}</h1>
+      <p class="text-slate-400 leading-7 mt-4">{{ t.image_intro }}</p>
+    </section>
+
+    {% if adsense_client and adsense_slot_top %}
+    <div class="ad-slot ad-slot-live mb-8" aria-label="{{ t.ad_space }}">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="{{ adsense_client }}" data-ad-slot="{{ adsense_slot_top }}" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    </div>
+    {% endif %}
+
+    <section class="studio-panel admin-panel rounded-3xl p-4 sm:p-8" aria-label="{{ t.image_heading }}">
+      <div class="image-mode-grid" role="group" aria-label="{{ t.image_choose_tool }}">
+        <button type="button" class="image-mode-btn is-active" data-image-mode="compress">{{ t.image_compress }}</button>
+        <button type="button" class="image-mode-btn" data-image-mode="resize">{{ t.image_resize }}</button>
+        <button type="button" class="image-mode-btn" data-image-mode="convert">{{ t.image_convert }}</button>
+        <button type="button" class="image-mode-btn" data-image-mode="crop">{{ t.image_crop }}</button>
+      </div>
+
+      <label id="image-drop-zone" class="image-drop-zone dropzone-target block rounded-2xl p-8 sm:p-12 text-center cursor-pointer mt-6" for="image-file-input">
+        <input id="image-file-input" class="sr-only" type="file" accept="image/jpeg,image/png,image/webp">
+        <span class="image-upload-icon" aria-hidden="true">▧</span>
+        <span class="block text-xl font-bold text-white mt-3">{{ t.image_drop_title }}</span>
+        <span class="block text-sm text-slate-400 mt-2">{{ t.image_drop_hint }}</span>
+        <span class="inline-flex btn-ghost rounded-xl px-5 py-2.5 mt-5">{{ t.image_browse }}</span>
+        <span class="block text-xs text-slate-500 mt-4">{{ t.image_supported }}</span>
+      </label>
+
+      <section id="image-editor" class="hidden mt-7" aria-label="{{ t.image_heading }}">
+        <div class="image-workspace-grid">
+          <div class="image-preview-card">
+            <div class="flex items-center justify-between gap-3 mb-3">
+              <h2 class="font-bold text-white">{{ t.image_preview }}</h2>
+              <button id="image-change-file" type="button" class="text-sm text-violet-300 hover:text-white">{{ t.image_change }}</button>
+            </div>
+            <div class="image-canvas-wrap">
+              <canvas id="image-preview-canvas" aria-label="{{ t.image_preview }}"></canvas>
+            </div>
+            <p id="image-crop-hint" class="hidden text-xs text-slate-400 mt-3">{{ t.image_crop_hint }}</p>
+            <div class="image-file-facts mt-4">
+              <span><b>{{ t.image_dimensions }}</b> <span id="image-original-dimensions">—</span></span>
+              <span><b>{{ t.image_original_size }}</b> <span id="image-original-size">—</span></span>
+            </div>
+          </div>
+
+          <div class="image-settings-card">
+            <h2 class="font-bold text-white mb-5">{{ t.image_settings }}</h2>
+
+            <div id="image-quality-setting" class="image-setting-row">
+              <label for="image-quality" class="font-medium">{{ t.image_quality }}</label>
+              <div class="flex items-center gap-3 mt-2">
+                <input id="image-quality" type="range" min="35" max="100" value="82" class="w-full accent-violet-500">
+                <output id="image-quality-value" for="image-quality" class="text-sm font-mono text-violet-300">82%</output>
+              </div>
+            </div>
+
+            <div id="image-size-settings" class="hidden image-setting-row mt-5">
+              <div class="grid grid-cols-2 gap-3">
+                <label class="text-sm text-slate-300">{{ t.image_width }}
+                  <input id="image-width" type="number" min="1" max="12000" inputmode="numeric" class="w-full rounded-lg px-3 py-2 mt-1">
+                </label>
+                <label class="text-sm text-slate-300">{{ t.image_height }}
+                  <input id="image-height" type="number" min="1" max="12000" inputmode="numeric" class="w-full rounded-lg px-3 py-2 mt-1">
+                </label>
+              </div>
+              <label class="flex items-center gap-2 text-sm text-slate-300 mt-3">
+                <input id="image-keep-ratio" type="checkbox" checked class="accent-violet-500">
+                {{ t.image_keep_ratio }}
+              </label>
+            </div>
+
+            <div id="image-crop-settings" class="hidden image-setting-row mt-5">
+              <label for="image-crop-ratio" class="text-sm text-slate-300">{{ t.image_crop_ratio }}</label>
+              <select id="image-crop-ratio" class="w-full rounded-lg px-3 py-2 mt-1">
+                <option value="free">{{ t.image_crop_free }}</option>
+                <option value="1">{{ t.image_crop_square }}</option>
+                <option value="4/5">{{ t.image_crop_portrait }}</option>
+                <option value="16/9">{{ t.image_crop_landscape }}</option>
+              </select>
+            </div>
+
+            <div id="image-format-setting" class="image-setting-row mt-5">
+              <label for="image-format" class="text-sm text-slate-300">{{ t.image_format }}</label>
+              <select id="image-format" class="w-full rounded-lg px-3 py-2 mt-1">
+                <option value="image/webp">WebP</option>
+                <option value="image/jpeg">JPG</option>
+                <option value="image/png">PNG</option>
+              </select>
+              <p id="image-jpeg-note" class="hidden text-xs text-slate-500 mt-2">{{ t.image_jpeg_note }}</p>
+            </div>
+
+            <p class="text-xs text-slate-500 leading-5 mt-5">{{ t.image_local_note }}</p>
+            <button id="image-process" type="button" class="btn-violet w-full rounded-xl px-5 py-3 mt-6">{{ t.image_process }}</button>
+            <p id="image-status" class="text-sm text-slate-300 mt-4 min-h-6" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <section id="image-result" class="hidden image-result-card mt-6" aria-live="polite">
+          <div>
+            <p class="text-xs uppercase tracking-wider text-emerald-300">{{ t.image_ready }}</p>
+            <h2 class="font-bold text-white mt-1" id="image-result-name"></h2>
+            <p class="text-sm text-slate-400 mt-1"><span id="image-result-dimensions"></span> · <span id="image-result-size"></span></p>
+          </div>
+          <a id="image-download" class="btn-violet inline-flex justify-center rounded-xl px-6 py-3" href="#" download>{{ t.image_download }}</a>
+        </section>
+      </section>
+    </section>
+
+    <section class="image-guide-grid mt-8" aria-label="{{ t.image_guide_title }}">
+      <article class="studio-card rounded-2xl p-5">
+        <h2 class="font-bold text-white">{{ t.image_guide_compress_title }}</h2>
+        <p class="text-sm text-slate-400 leading-6 mt-2">{{ t.image_guide_compress_text }}</p>
+      </article>
+      <article class="studio-card rounded-2xl p-5">
+        <h2 class="font-bold text-white">{{ t.image_guide_privacy_title }}</h2>
+        <p class="text-sm text-slate-400 leading-6 mt-2">{{ t.image_local_note }}</p>
+      </article>
+    </section>
+
+    {% if adsense_client and adsense_slot_bottom %}
+    <div class="ad-slot ad-slot-live mt-8" aria-label="{{ t.ad_space }}">
+      <ins class="adsbygoogle" style="display:block" data-ad-client="{{ adsense_client }}" data-ad-slot="{{ adsense_slot_bottom }}" data-ad-format="auto" data-full-width-responsive="true"></ins>
+    </div>
+    {% endif %}
+  </main>
+
+  <footer class="border-t border-white/[0.06] bg-[#090a0d] py-7 text-center text-xs text-slate-500">
+    <p>&copy; {{ current_year }} Nobaj.com</p>
+    <nav class="flex flex-wrap justify-center gap-4 mt-3" aria-label="{{ t.footer_title }}">
+      <a href="{{ language_path }}" class="hover:text-violet-300">Nobaj</a>
+      <a href="{{ legal_links.privacy }}" class="hover:text-violet-300">{{ t.footer_privacy_link }}</a>
+      <a href="{{ legal_links.terms }}" class="hover:text-violet-300">{{ t.footer_terms_link }}</a>
+      <a href="{{ legal_links.contact }}" class="hover:text-violet-300">{{ t.footer_contact_link }}</a>
+    </nav>
+  </footer>
+
+  <script id="image-copy" type="application/json">{{ image_copy | tojson }}</script>
+  <script defer src="/static/js/image-tools.js?v={{ asset_versions.images }}"></script>
+  {% if adsense_client %}
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ adsense_client }}" crossorigin="anonymous"></script>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  {% endif %}
+</body>
+</html>

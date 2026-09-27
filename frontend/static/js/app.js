@@ -172,7 +172,7 @@ function formatBytes(bytes) {
 }
 
 function setupTabs() {
-  const tabs = document.querySelectorAll('.tab-btn');
+  const tabs = document.querySelectorAll('button.tab-btn');
   tabs.forEach(btn => {
     btn.addEventListener('click', () => {
       const target = btn.dataset.tab;

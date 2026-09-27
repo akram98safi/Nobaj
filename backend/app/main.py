@@ -80,6 +80,7 @@ def static_asset_versions():
     assets = {
         "css": STATIC_DIR / "css" / "app.min.css",
         "app": STATIC_DIR / "js" / "app.js",
+        "images": STATIC_DIR / "js" / "image-tools.js",
         "admin": STATIC_DIR / "js" / "admin.js",
     }
     return {
@@ -291,10 +292,14 @@ async def sitemap_xml():
         f"  <url><loc>{base_url}{path}</loc></url>\n"
         for path in ("/privacy", "/terms", "/contact", "/ar/privacy", "/ar/terms", "/ar/contact")
     )
+    image_tool_urls = "".join(
+        f"  <url><loc>{base_url}{language_path(language).rstrip('/')}/tools/image-tools</loc></url>\n"
+        for language in SUPPORTED_LANGUAGES
+    )
     content = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-        f"{landing_urls}{tool_urls}{trust_urls}"
+        f"{landing_urls}{tool_urls}{image_tool_urls}{trust_urls}"
         "</urlset>\n"
     )
     return PlainTextResponse(content, media_type="application/xml")
@@ -337,6 +342,68 @@ def tool_page_context(request: Request, language: str, slug: str):
     }
 
 
+IMAGE_COPY_KEYS = (
+    "image_error_empty", "image_error_type", "image_error_size",
+    "image_error_dimensions", "image_error_crop", "image_error_process",
+    "image_processing", "image_status_ready", "image_status_done",
+)
+
+
+def image_page_context(language: str):
+    prefix = language_path(language).rstrip("/")
+    site_url = settings.PUBLIC_BASE_URL.rstrip("/")
+    return {
+        "language": language,
+        "direction": "rtl" if language == "ar" else "ltr",
+        "language_path": language_path(language),
+        "language_options": [
+            (
+                code,
+                LANGUAGE_NAMES[code],
+                f"{language_path(code).rstrip('/')}/tools/image-tools"
+                + ("?lang=en" if code == "en" else ""),
+            )
+            for code in SUPPORTED_LANGUAGES
+        ],
+        "t": LANGUAGE_DATA[language],
+        "image_copy": {key: LANGUAGE_DATA[language][key] for key in IMAGE_COPY_KEYS},
+        "canonical_url": f"{site_url}{prefix}/tools/image-tools",
+        "site_url": site_url,
+        "alternates": [
+            (code, f"{site_url}{language_path(code).rstrip('/')}/tools/image-tools")
+            for code in SUPPORTED_LANGUAGES
+        ],
+        "open_graph_locale": OPEN_GRAPH_LOCALES[language],
+        "google_site_verification": settings.GOOGLE_SITE_VERIFICATION,
+        "adsense_client": settings.GOOGLE_ADSENSE_CLIENT,
+        "adsense_slot_top": settings.GOOGLE_ADSENSE_SLOT_TOP,
+        "adsense_slot_bottom": settings.GOOGLE_ADSENSE_SLOT_BOTTOM,
+        "legal_links": {
+            "privacy": f"{prefix}/privacy",
+            "terms": f"{prefix}/terms",
+            "contact": f"{prefix}/contact",
+        },
+        "asset_versions": static_asset_versions(),
+        "current_year": datetime.now().year,
+    }
+
+
+async def render_image_page(request: Request, language: str):
+    context = image_page_context(language)
+    response = templates.TemplateResponse(request, "images.html", context)
+    response.headers["Content-Language"] = language
+    response.headers["Cache-Control"] = "private, no-store"
+    response.set_cookie(
+        "nobaj_lang",
+        language,
+        max_age=60 * 60 * 24 * 365,
+        httponly=True,
+        samesite="lax",
+        secure=request.url.scheme == "https" or request.headers.get("x-forwarded-proto") == "https",
+    )
+    return response
+
+
 async def render_tool_page(request: Request, language: str, slug: str):
     if slug not in TOOL_PAGES:
         raise HTTPException(status_code=404, detail="Page not found")
@@ -349,6 +416,18 @@ async def render_tool_page(request: Request, language: str, slug: str):
 @app.get("/tools/{slug}", response_class=HTMLResponse, include_in_schema=False)
 async def default_tool_page(request: Request, slug: str):
     """Serve English tool pages by default and respect saved/browser language."""
+    if slug == "image-tools":
+        requested_language = request.query_params.get("lang", "").lower()
+        language = requested_language if requested_language in SUPPORTED_LANGUAGES else preferred_language(request)
+        if language == "en":
+            response = await render_image_page(request, "en")
+            response.headers["Vary"] = "Accept-Language, Cookie"
+            return response
+        prefix = language_path(language).rstrip("/")
+        response = RedirectResponse(f"{prefix}/tools/image-tools", status_code=302)
+        response.headers["Vary"] = "Accept-Language, Cookie"
+        response.headers["Cache-Control"] = "private, no-store"
+        return response
     if slug not in TOOL_PAGES:
         raise HTTPException(status_code=404, detail="Page not found")
     language = preferred_language(request)
@@ -368,13 +447,15 @@ async def default_tool_page(request: Request, slug: str):
 async def localized_tool_page(request: Request, language: str, slug: str):
     if language not in SUPPORTED_LANGUAGES:
         raise HTTPException(status_code=404, detail="Page not found")
+    if slug == "image-tools":
+        return await render_image_page(request, language)
     return await render_tool_page(request, language, slug)
 
 
 TRUST_COPY = {
     "en": {
         "privacy": ("Privacy policy", "How Nobaj handles your media and basic usage data.", [
-            ("Media files", "Files you upload are sent to the Nobaj server for the conversion you request. Temporary uploads and generated outputs are automatically removed after {ttl} minutes. Do not upload files you are not authorized to process."),
+            ("Media files", "Images processed with Nobaj Image Tools stay in your browser and are not uploaded. Video and audio files you submit for conversion are sent to the Nobaj server; temporary uploads and generated outputs are automatically removed after {ttl} minutes. Do not submit files you are not authorized to process."),
             ("Basic analytics", "Nobaj uses a random visitor identifier cookie to estimate unique visits. When the landing page is opened, the service records its path and a shortened browser user-agent for first-party analytics. It does not store raw IP addresses. Analytics records are kept in the service database; no fixed deletion schedule is currently configured."),
             ("Cookies and external services", "A preference cookie remembers your language. Google AdSense may be loaded when configured. Third-party providers may receive standard connection data when your browser requests their resources."),
             ("Questions", "For support, use the Nobaj project issue tracker linked on the Contact page. Do not include private media or sensitive information in a public report."),
@@ -391,7 +472,7 @@ TRUST_COPY = {
     },
     "ar": {
         "privacy": ("سياسة الخصوصية", "كيف يتعامل نُباج مع ملفاتك وبيانات الاستخدام الأساسية.", [
-            ("ملفات الوسائط", "تُرفع الملفات إلى خادم نُباج لتنفيذ التحويل الذي تطلبه. تُحذف الملفات المؤقتة والنتائج تلقائيًا بعد {ttl} دقيقة. لا ترفع ملفات لا تملك صلاحية معالجتها."),
+            ("ملفات الوسائط", "تُعالج الصور عبر أدوات الصور داخل متصفحك ولا تُرفع إلى نُباج. أما ملفات الفيديو والصوت التي ترسلها للتحويل فتُرفع إلى خادم نُباج؛ وتُحذف الملفات المؤقتة والنتائج تلقائيًا بعد {ttl} دقيقة. لا ترسل ملفات لا تملك صلاحية معالجتها."),
             ("إحصاءات الاستخدام", "يستخدم نُباج ملف ارتباط بمعرّف عشوائي لتقدير عدد الزوار الفريدين. يسجّل مسار الصفحة وبيانات مختصرة عن متصفحك لأغراض إحصائية داخلية، ولا يخزّن عنوان IP الخام. تُحفظ سجلات الإحصاءات في قاعدة بيانات الخدمة، ولا توجد حاليًا مدة حذف محددة لها."),
             ("ملفات الارتباط والخدمات الخارجية", "يحفظ ملف ارتباط تفضيل اللغة. وقد يحمّل الموقع إعلانات Google AdSense عند تفعيلها. قد تستقبل الجهات الخارجية بيانات الاتصال المعتادة عند طلب المتصفح لمواردها."),
             ("الاستفسارات", "للدعم، استخدم صفحة المشكلات في مستودع مشروع نُباج والمشار إليه في صفحة التواصل. لا تضع ملفات خاصة أو معلومات حساسة في بلاغ عام."),

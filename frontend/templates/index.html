@@ -198,10 +198,7 @@
           <span>🎞️</span>
           <span data-i18n="tab_gif">{{ translations['tab_gif']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
         </button>
-        <button class="tab-btn px-4 py-2.5 rounded-xl font-medium text-xs text-slate-500 cursor-not-allowed hidden md:flex items-center gap-1.5" data-tab="more">
-          <span>✨</span>
-          <span data-i18n="tab_more">{{ translations['tab_more']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</span>
-        </button>
+        <a href="{{ '/ar' if page_language == 'ar' else '' }}/tools/image-tools" class="tab-btn px-4 py-2.5 rounded-xl font-bold text-xs text-slate-300 hover:text-white flex items-center gap-1.5" data-i18n="tab_images">🖼️ {{ translations['tab_images'] }}</a>
       </div>
     </div>
 
@@ -495,6 +492,7 @@
         <a href="{{ '/ar' if page_language == 'ar' else '' }}/tools/video-compressor" class="hover:text-violet-300">{{ translations.tab_compress }}</a>
         <a href="{{ '/ar' if page_language == 'ar' else '' }}/tools/audio-extractor" class="hover:text-violet-300">{{ translations.tab_audio }}</a>
         <a href="{{ '/ar' if page_language == 'ar' else '' }}/tools/video-to-gif" class="hover:text-violet-300">{{ translations.tab_gif }}</a>
+        <a href="{{ '/ar' if page_language == 'ar' else '' }}/tools/image-tools" data-i18n="tab_images" class="hover:text-violet-300">{{ translations['tab_images'] }}</a>
         <a href="{{ '/ar' if page_language == 'ar' else '' }}/privacy" data-i18n="footer_privacy_link" class="hover:text-violet-300">{{ translations['footer_privacy_link']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</a>
         <a href="{{ '/ar' if page_language == 'ar' else '' }}/terms" data-i18n="footer_terms_link" class="hover:text-violet-300">{{ translations['footer_terms_link']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</a>
         <a href="{{ '/ar' if page_language == 'ar' else '' }}/contact" data-i18n="footer_contact_link" class="hover:text-violet-300">{{ translations['footer_contact_link']|replace('{ttl}', file_ttl_minutes|string)|replace('{size}', max_upload_size_mb|string) }}</a>
