@@ -318,7 +318,12 @@ def tool_page_context(request: Request, language: str, slug: str):
         "direction": "rtl" if language == "ar" else "ltr",
         "language_name": LANGUAGE_NAMES[language],
         "language_options": [
-            (code, LANGUAGE_NAMES[code], f"{settings.PUBLIC_BASE_URL.rstrip('/')}{language_path(code).rstrip('/')}/tools/{slug}")
+            (
+                code,
+                LANGUAGE_NAMES[code],
+                f"{language_path(code).rstrip('/')}/tools/{slug}"
+                + ("?lang=en" if code == "en" else ""),
+            )
             for code in SUPPORTED_LANGUAGES
         ],
         "translations": translations,
@@ -436,7 +441,8 @@ async def default_tool_page(request: Request, slug: str):
         return response
     if slug not in TOOL_PAGES:
         raise HTTPException(status_code=404, detail="Page not found")
-    language = preferred_language(request)
+    requested_language = request.query_params.get("lang", "").lower()
+    language = requested_language if requested_language in SUPPORTED_LANGUAGES else preferred_language(request)
     if language == "en":
         response = await render_tool_page(request, "en", slug)
         response.headers["Vary"] = "Accept-Language, Cookie"
@@ -503,6 +509,15 @@ def trust_context(language: str, page: str):
     return {
         "language": content_language,
         "direction": "rtl" if content_language == "ar" else "ltr",
+        "translations": LANGUAGE_DATA[content_language],
+        "language_options": [
+            (
+                code,
+                LANGUAGE_NAMES[code],
+                f"{language_path(code).rstrip('/')}/{page}" + ("?lang=en" if code == "en" else ""),
+            )
+            for code in ("en", "ar")
+        ],
         "page": page,
         "title": title,
         "description": description,
@@ -525,7 +540,8 @@ async def trust_page(request: Request, page: str):
     if page not in {"privacy", "terms", "contact"}:
         raise HTTPException(status_code=404, detail="Page not found")
     # Legal content is currently maintained in English and Arabic only.
-    language = preferred_language(request)
+    requested_language = request.query_params.get("lang", "").lower()
+    language = requested_language if requested_language in ("en", "ar") else preferred_language(request)
     if language == "ar":
         response = RedirectResponse(f"/ar/{page}", status_code=302)
         response.headers["Vary"] = "Accept-Language, Cookie"
