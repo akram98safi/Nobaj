@@ -832,3 +832,10 @@ select:focus, input:focus {
     animation-iteration-count: 1 !important;
   }
 }
+.image-back-arrow {
+  flex: 0 0 auto;
+}
+
+[dir="rtl"] .image-back-arrow {
+  transform: rotate(180deg);
+}
