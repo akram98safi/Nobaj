@@ -836,6 +836,108 @@ select:focus, input:focus {
   flex: 0 0 auto;
 }
 
+.home-tool-directory {
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 1.5rem;
+  background: linear-gradient(145deg, rgba(17, 21, 42, 0.72), rgba(9, 10, 13, 0.78));
+}
+
+.home-tool-category {
+  margin: 0 0 0.8rem;
+  color: #c4b5fd;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.home-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.home-tool-card {
+  display: grid;
+  min-width: 0;
+  min-height: 9.5rem;
+  grid-template-columns: 2.7rem minmax(0, 1fr);
+  grid-template-rows: 1fr auto;
+  align-items: start;
+  column-gap: 0.8rem;
+  row-gap: 0.7rem;
+  color: inherit;
+  text-decoration: none;
+}
+
+.home-tool-card:hover,
+.home-tool-card:focus-visible {
+  border-color: rgba(167, 139, 250, 0.52);
+  box-shadow: 0 10px 26px -20px rgba(167, 139, 250, 0.65);
+}
+
+.home-tool-icon {
+  display: grid;
+  width: 2.7rem;
+  height: 2.7rem;
+  place-items: center;
+  border: 1px solid rgba(167, 139, 250, 0.24);
+  border-radius: 0.9rem;
+  background: rgba(139, 92, 246, 0.12);
+  color: #ddd6fe;
+  font-size: 1.25rem;
+}
+
+.home-tool-icon-text {
+  font-size: 0.67rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+
+.home-tool-card-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.home-tool-card-copy strong {
+  color: #f8fafc;
+  font-size: 0.92rem;
+  line-height: 1.35;
+}
+
+.home-tool-card-copy > span {
+  color: #9aa4b7;
+  font-size: 0.75rem;
+  line-height: 1.55;
+}
+
+.home-tool-open {
+  display: flex;
+  grid-column: 2;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  color: #c4b5fd;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.home-tool-arrow {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+}
+
+[dir="rtl"] .home-tool-arrow {
+  transform: rotate(180deg);
+}
+
+.home-tool-card:focus-visible {
+  outline: 2px solid #c4b5fd;
+  outline-offset: 3px;
+}
+
 [dir="rtl"] .image-back-arrow {
   transform: rotate(180deg);
 }
@@ -952,6 +1054,10 @@ select:focus, input:focus {
 }
 
 @media (max-width: 900px) {
+  .home-tools-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .image-extra-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -964,5 +1070,11 @@ select:focus, input:focus {
 
   .image-extra-controls {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .home-tools-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

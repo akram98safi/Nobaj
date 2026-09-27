@@ -210,5 +210,12 @@
   "image_pdf_landscape": "横向き",
   "image_pdf_generate": "PDFを作成",
   "image_pdf_count": "画像数: {count}",
-  "image_pdf_error_limit": "合計100 MB未満で、最大15枚の画像を選択してください。"
+  "image_pdf_error_limit": "合計100 MB未満で、最大15枚の画像を選択してください。",
+  "home_tools_heading": "すべての無料ツール",
+  "home_tools_intro": "ツールを選んですぐに開始。画像ツールはすべて端末内で動作します。",
+  "home_media_tools": "動画・音声・GIF",
+  "home_image_compress_desc": "画質を調整して画像のファイルサイズを縮小します。",
+  "home_image_resize_desc": "画像の幅と高さを変更し、縦横比を維持します。",
+  "home_image_convert_desc": "JPG・PNG・WebP形式を相互変換します。",
+  "home_image_crop_desc": "自由に切り抜くか、決まった比率を選択します。"
 }

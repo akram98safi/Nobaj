@@ -21,7 +21,9 @@
 
   if (!input || !canvas || !context) return;
 
-  let mode = 'compress';
+  const supportedModes = ['compress', 'resize', 'convert', 'crop'];
+  const requestedMode = new URLSearchParams(window.location.search).get('mode');
+  let mode = supportedModes.includes(requestedMode) ? requestedMode : 'compress';
   let sourceFile = null;
   let sourceImage = null;
   let sourceUrl = null;
@@ -340,6 +342,8 @@
   const finishCrop = () => { cropStart = null; };
   canvas.addEventListener('pointerup', finishCrop);
   canvas.addEventListener('pointercancel', finishCrop);
+
+  updateSettings();
 
   window.addEventListener('beforeunload', () => {
     if (sourceUrl) URL.revokeObjectURL(sourceUrl);

@@ -210,5 +210,12 @@
   "image_pdf_landscape": "Querformat",
   "image_pdf_generate": "PDF erstellen",
   "image_pdf_count": "Bilder: {count}",
-  "image_pdf_error_limit": "Wähle höchstens 15 Bilder mit insgesamt weniger als 100 MB."
+  "image_pdf_error_limit": "Wähle höchstens 15 Bilder mit insgesamt weniger als 100 MB.",
+  "home_tools_heading": "Alle kostenlosen Tools",
+  "home_tools_intro": "Wähle ein Tool und leg direkt los. Alle Bildtools laufen auf deinem Gerät.",
+  "home_media_tools": "Video, Audio und GIF",
+  "home_image_compress_desc": "Verringere die Dateigröße mit einstellbarer Qualität.",
+  "home_image_resize_desc": "Ändere Breite und Höhe und behalte das Seitenverhältnis bei.",
+  "home_image_convert_desc": "Wandle zwischen JPG, PNG und WebP um.",
+  "home_image_crop_desc": "Schneide Bilder frei zu oder wähle ein Seitenverhältnis."
 }

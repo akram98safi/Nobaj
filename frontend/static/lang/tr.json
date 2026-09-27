@@ -210,5 +210,12 @@
   "image_pdf_landscape": "Yatay",
   "image_pdf_generate": "PDF oluştur",
   "image_pdf_count": "Görsel sayısı: {count}",
-  "image_pdf_error_limit": "Toplam boyutu 100 MB'den az olan en fazla 15 görsel seçin."
+  "image_pdf_error_limit": "Toplam boyutu 100 MB'den az olan en fazla 15 görsel seçin.",
+  "home_tools_heading": "Tüm ücretsiz araçlar",
+  "home_tools_intro": "Bir araç seçip hemen başlayın. Görsel araçlarının tümü cihazınızda çalışır.",
+  "home_media_tools": "Video, ses ve GIF",
+  "home_image_compress_desc": "Kaliteyi ayarlayarak görsel dosyalarının boyutunu küçültün.",
+  "home_image_resize_desc": "Görsel boyutlarını oranı koruyarak değiştirin.",
+  "home_image_convert_desc": "JPG, PNG ve WebP arasında dönüştürün.",
+  "home_image_crop_desc": "Serbest kırpın veya hazır bir oran seçin."
 }

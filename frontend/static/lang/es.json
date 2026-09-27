@@ -210,5 +210,12 @@
   "image_pdf_landscape": "Horizontal",
   "image_pdf_generate": "Crear PDF",
   "image_pdf_count": "Imágenes: {count}",
-  "image_pdf_error_limit": "Elige hasta 15 imágenes con un tamaño total inferior a 100 MB."
+  "image_pdf_error_limit": "Elige hasta 15 imágenes con un tamaño total inferior a 100 MB.",
+  "home_tools_heading": "Todas las herramientas gratis",
+  "home_tools_intro": "Elige una herramienta y empieza. Todas las herramientas de imagen funcionan en tu dispositivo.",
+  "home_media_tools": "Vídeo, audio y GIF",
+  "home_image_compress_desc": "Reduce el tamaño de la imagen ajustando la calidad.",
+  "home_image_resize_desc": "Cambia las dimensiones y conserva la proporción.",
+  "home_image_convert_desc": "Convierte entre JPG, PNG y WebP.",
+  "home_image_crop_desc": "Recorta libremente o elige una proporción."
 }

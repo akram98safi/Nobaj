@@ -210,5 +210,12 @@
   "image_pdf_landscape": "Paisagem",
   "image_pdf_generate": "Criar PDF",
   "image_pdf_count": "Imagens: {count}",
-  "image_pdf_error_limit": "Escolha até 15 imagens, com tamanho total inferior a 100 MB."
+  "image_pdf_error_limit": "Escolha até 15 imagens, com tamanho total inferior a 100 MB.",
+  "home_tools_heading": "Todas as ferramentas grátis",
+  "home_tools_intro": "Escolha uma ferramenta e comece. Todos os recursos de imagem funcionam no seu dispositivo.",
+  "home_media_tools": "Vídeo, áudio e GIF",
+  "home_image_compress_desc": "Reduza o tamanho das imagens ajustando a qualidade.",
+  "home_image_resize_desc": "Altere as dimensões mantendo as proporções.",
+  "home_image_convert_desc": "Converta entre JPG, PNG e WebP.",
+  "home_image_crop_desc": "Recorte livremente ou escolha uma proporção."
 }

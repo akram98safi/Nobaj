@@ -210,5 +210,12 @@
   "image_pdf_landscape": "Paysage",
   "image_pdf_generate": "Créer le PDF",
   "image_pdf_count": "Images : {count}",
-  "image_pdf_error_limit": "Choisissez jusqu’à 15 images, pour un total inférieur à 100 Mo."
+  "image_pdf_error_limit": "Choisissez jusqu’à 15 images, pour un total inférieur à 100 Mo.",
+  "home_tools_heading": "Tous les outils gratuits",
+  "home_tools_intro": "Choisissez un outil et commencez. Tous les outils d’image fonctionnent sur votre appareil.",
+  "home_media_tools": "Vidéo, audio et GIF",
+  "home_image_compress_desc": "Réduisez la taille des images en ajustant la qualité.",
+  "home_image_resize_desc": "Modifiez les dimensions en conservant les proportions.",
+  "home_image_convert_desc": "Convertissez entre JPG, PNG et WebP.",
+  "home_image_crop_desc": "Recadrez librement ou choisissez un format prédéfini."
 }

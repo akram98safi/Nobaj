@@ -146,6 +146,71 @@
       </div>
     </div>
 
+    <section id="all-tools" class="home-tool-directory" aria-labelledby="home-tools-heading">
+      <div class="text-center max-w-2xl mx-auto mb-6">
+        <h2 id="home-tools-heading" class="text-2xl sm:text-3xl font-black text-white mt-2" data-i18n="home_tools_heading">{{ translations['home_tools_heading'] }}</h2>
+        <p class="text-sm text-slate-400 leading-6 mt-2" data-i18n="home_tools_intro">{{ translations['home_tools_intro'] }}</p>
+      </div>
+
+      <h3 class="home-tool-category" data-i18n="home_media_tools">{{ translations['home_media_tools'] }}</h3>
+      <div class="home-tools-grid mb-6">
+        <a class="home-tool-card studio-card rounded-2xl p-4 sm:p-5" href="?tool=compress#workspace">
+          <span class="home-tool-icon" aria-hidden="true">🎬</span>
+          <span class="home-tool-card-copy"><strong>{{ translations['tab_compress'] }}</strong><span>{{ translations['seo_tool_compress_description'] }}</span></span>
+          <span class="home-tool-open"><span>{{ translations['tool_open_title'] }}</span><svg class="home-tool-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+        <a class="home-tool-card studio-card rounded-2xl p-4 sm:p-5" href="?tool=audio#workspace">
+          <span class="home-tool-icon" aria-hidden="true">🎙️</span>
+          <span class="home-tool-card-copy"><strong>{{ translations['tab_audio'] }}</strong><span>{{ translations['seo_tool_audio_description'] }}</span></span>
+          <span class="home-tool-open"><span>{{ translations['tool_open_title'] }}</span><svg class="home-tool-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+        <a class="home-tool-card studio-card rounded-2xl p-4 sm:p-5" href="?tool=gif#workspace">
+          <span class="home-tool-icon home-tool-icon-text" aria-hidden="true">GIF</span>
+          <span class="home-tool-card-copy"><strong>{{ translations['tab_gif'] }}</strong><span>{{ translations['seo_tool_gif_description'] }}</span></span>
+          <span class="home-tool-open"><span>{{ translations['tool_open_title'] }}</span><svg class="home-tool-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+      </div>
+
+      <h3 class="home-tool-category" data-i18n="tab_images">{{ translations['tab_images'] }}</h3>
+      <div class="home-tools-grid">
+        <a class="home-tool-card studio-card rounded-2xl p-4 sm:p-5" href="{{ '' if page_language == 'en' else '/' + page_language }}/tools/image-tools?mode=compress#image-drop-zone">
+          <span class="home-tool-icon" aria-hidden="true">🗜️</span>
+          <span class="home-tool-card-copy"><strong>{{ translations['image_compress'] }}</strong><span>{{ translations['home_image_compress_desc'] }}</span></span>
+          <span class="home-tool-open"><span>{{ translations['tool_open_title'] }}</span><svg class="home-tool-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+        <a class="home-tool-card studio-card rounded-2xl p-4 sm:p-5" href="{{ '' if page_language == 'en' else '/' + page_language }}/tools/image-tools?mode=resize#image-drop-zone">
+          <span class="home-tool-icon" aria-hidden="true">↔</span>
+          <span class="home-tool-card-copy"><strong>{{ translations['image_resize'] }}</strong><span>{{ translations['home_image_resize_desc'] }}</span></span>
+          <span class="home-tool-open"><span>{{ translations['tool_open_title'] }}</span><svg class="home-tool-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+        <a class="home-tool-card studio-card rounded-2xl p-4 sm:p-5" href="{{ '' if page_language == 'en' else '/' + page_language }}/tools/image-tools?mode=convert#image-drop-zone">
+          <span class="home-tool-icon home-tool-icon-text" aria-hidden="true">WEBP</span>
+          <span class="home-tool-card-copy"><strong>{{ translations['image_convert'] }}</strong><span>{{ translations['home_image_convert_desc'] }}</span></span>
+          <span class="home-tool-open"><span>{{ translations['tool_open_title'] }}</span><svg class="home-tool-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+        <a class="home-tool-card studio-card rounded-2xl p-4 sm:p-5" href="{{ '' if page_language == 'en' else '/' + page_language }}/tools/image-tools?mode=crop#image-drop-zone">
+          <span class="home-tool-icon" aria-hidden="true">✂️</span>
+          <span class="home-tool-card-copy"><strong>{{ translations['image_crop'] }}</strong><span>{{ translations['home_image_crop_desc'] }}</span></span>
+          <span class="home-tool-open"><span>{{ translations['tool_open_title'] }}</span><svg class="home-tool-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+        <a class="home-tool-card studio-card rounded-2xl p-4 sm:p-5" href="{{ '' if page_language == 'en' else '/' + page_language }}/tools/image-tools#qr-tool">
+          <span class="home-tool-icon home-tool-icon-text" aria-hidden="true">QR</span>
+          <span class="home-tool-card-copy"><strong>{{ translations['image_qr_title'] }}</strong><span>{{ translations['image_qr_intro'] }}</span></span>
+          <span class="home-tool-open"><span>{{ translations['tool_open_title'] }}</span><svg class="home-tool-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+        <a class="home-tool-card studio-card rounded-2xl p-4 sm:p-5" href="{{ '' if page_language == 'en' else '/' + page_language }}/tools/image-tools#favicon-tool">
+          <span class="home-tool-icon" aria-hidden="true">⭐</span>
+          <span class="home-tool-card-copy"><strong>{{ translations['image_favicon_title'] }}</strong><span>{{ translations['image_favicon_intro'] }}</span></span>
+          <span class="home-tool-open"><span>{{ translations['tool_open_title'] }}</span><svg class="home-tool-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+        <a class="home-tool-card studio-card rounded-2xl p-4 sm:p-5" href="{{ '' if page_language == 'en' else '/' + page_language }}/tools/image-tools#pdf-tool">
+          <span class="home-tool-icon home-tool-icon-text" aria-hidden="true">PDF</span>
+          <span class="home-tool-card-copy"><strong>{{ translations['image_pdf_title'] }}</strong><span>{{ translations['image_pdf_intro'] }}</span></span>
+          <span class="home-tool-open"><span>{{ translations['tool_open_title'] }}</span><svg class="home-tool-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        </a>
+      </div>
+    </section>
+
     <!-- Public, first-party usage metrics -->
     <section id="public-stats" class="stats-strip" aria-label="{{ translations['public_stats_label'] }}" data-i18n-aria-label="public_stats_label">
       <div class="stats-heading">

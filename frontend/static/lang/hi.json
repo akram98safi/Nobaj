@@ -210,5 +210,12 @@
   "image_pdf_landscape": "लैंडस्केप",
   "image_pdf_generate": "PDF बनाएँ",
   "image_pdf_count": "छवियाँ: {count}",
-  "image_pdf_error_limit": "अधिकतम 15 छवियाँ चुनें, जिनका कुल आकार 100 MB से कम हो।"
+  "image_pdf_error_limit": "अधिकतम 15 छवियाँ चुनें, जिनका कुल आकार 100 MB से कम हो।",
+  "home_tools_heading": "सभी मुफ़्त टूल",
+  "home_tools_intro": "कोई टूल चुनें और शुरू करें। सभी इमेज टूल आपके डिवाइस पर चलते हैं।",
+  "home_media_tools": "वीडियो, ऑडियो और GIF",
+  "home_image_compress_desc": "गुणवत्ता नियंत्रित करके छवि का आकार घटाएँ।",
+  "home_image_resize_desc": "आकार बदलें और अनुपात बनाए रखें।",
+  "home_image_convert_desc": "JPG, PNG और WebP के बीच बदलें।",
+  "home_image_crop_desc": "मनचाहे तरीके से काटें या अनुपात चुनें।"
 }

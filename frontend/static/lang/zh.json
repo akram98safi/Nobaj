@@ -210,5 +210,12 @@
   "image_pdf_landscape": "横向",
   "image_pdf_generate": "生成 PDF",
   "image_pdf_count": "图片数：{count}",
-  "image_pdf_error_limit": "最多选择 15 张图片，总大小需小于 100 MB。"
+  "image_pdf_error_limit": "最多选择 15 张图片，总大小需小于 100 MB。",
+  "home_tools_heading": "所有免费工具",
+  "home_tools_intro": "选择工具并立即开始。所有图片工具都在您的设备上运行。",
+  "home_media_tools": "视频、音频与 GIF",
+  "home_image_compress_desc": "调整画质以减小图片文件大小。",
+  "home_image_resize_desc": "调整图片尺寸并保持比例。",
+  "home_image_convert_desc": "在 JPG、PNG 和 WebP 格式之间转换。",
+  "home_image_crop_desc": "自由裁剪或选择预设宽高比。"
 }

@@ -210,5 +210,12 @@
   "image_pdf_landscape": "أفقي",
   "image_pdf_generate": "إنشاء ملف PDF",
   "image_pdf_count": "عدد الصور: {count}",
-  "image_pdf_error_limit": "اختر 15 صورة كحد أقصى، واجعل الحجم الإجمالي أقل من 100 ميغابايت."
+  "image_pdf_error_limit": "اختر 15 صورة كحد أقصى، واجعل الحجم الإجمالي أقل من 100 ميغابايت.",
+  "home_tools_heading": "كل الأدوات المجانية",
+  "home_tools_intro": "اختر الأداة التي تحتاجها وابدأ مباشرة. كل أدوات الصور تعمل على جهازك.",
+  "home_media_tools": "الفيديو والصوت وGIF",
+  "home_image_compress_desc": "قلّل حجم ملفات الصور مع التحكم بالجودة.",
+  "home_image_resize_desc": "غيّر عرض الصورة وارتفاعها مع الحفاظ على تناسبها.",
+  "home_image_convert_desc": "حوّل بين صيغ JPG وPNG وWebP.",
+  "home_image_crop_desc": "اقصص الصورة يدويًا أو اختر نسبة جاهزة."
 }
