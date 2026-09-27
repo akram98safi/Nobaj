@@ -81,6 +81,9 @@ def static_asset_versions():
         "css": STATIC_DIR / "css" / "app.min.css",
         "app": STATIC_DIR / "js" / "app.js",
         "images": STATIC_DIR / "js" / "image-tools.js",
+        "qr": STATIC_DIR / "js" / "qr-generator.js",
+        "favicon": STATIC_DIR / "js" / "favicon-maker.js",
+        "pdf": STATIC_DIR / "js" / "image-to-pdf.js",
         "admin": STATIC_DIR / "js" / "admin.js",
     }
     return {
@@ -346,6 +349,9 @@ IMAGE_COPY_KEYS = (
     "image_error_empty", "image_error_type", "image_error_size",
     "image_error_dimensions", "image_error_crop", "image_error_process",
     "image_processing", "image_status_ready", "image_status_done",
+    "image_qr_error_length", "image_pdf_list_aria", "image_pdf_move_up",
+    "image_pdf_move_down", "image_pdf_remove", "image_pdf_count",
+    "image_pdf_error_limit",
 )
 
 
