@@ -217,5 +217,8 @@
   "home_image_compress_desc": "调整画质以减小图片文件大小。",
   "home_image_resize_desc": "调整图片尺寸并保持比例。",
   "home_image_convert_desc": "在 JPG、PNG 和 WebP 格式之间转换。",
-  "home_image_crop_desc": "自由裁剪或选择预设宽高比。"
+  "home_image_crop_desc": "自由裁剪或选择预设宽高比。",
+  "home_select_tool": "使用此工具",
+  "home_change_tool": "选择其他工具",
+  "home_image_compress_title": "压缩图片"
 }

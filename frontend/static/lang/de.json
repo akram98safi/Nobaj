@@ -217,5 +217,8 @@
   "home_image_compress_desc": "Verringere die Dateigröße mit einstellbarer Qualität.",
   "home_image_resize_desc": "Ändere Breite und Höhe und behalte das Seitenverhältnis bei.",
   "home_image_convert_desc": "Wandle zwischen JPG, PNG und WebP um.",
-  "home_image_crop_desc": "Schneide Bilder frei zu oder wähle ein Seitenverhältnis."
+  "home_image_crop_desc": "Schneide Bilder frei zu oder wähle ein Seitenverhältnis.",
+  "home_select_tool": "Dieses Tool verwenden",
+  "home_change_tool": "Ein anderes Tool wählen",
+  "home_image_compress_title": "Bilder komprimieren"
 }

@@ -217,5 +217,8 @@
   "home_image_compress_desc": "Kaliteyi ayarlayarak görsel dosyalarının boyutunu küçültün.",
   "home_image_resize_desc": "Görsel boyutlarını oranı koruyarak değiştirin.",
   "home_image_convert_desc": "JPG, PNG ve WebP arasında dönüştürün.",
-  "home_image_crop_desc": "Serbest kırpın veya hazır bir oran seçin."
+  "home_image_crop_desc": "Serbest kırpın veya hazır bir oran seçin.",
+  "home_select_tool": "Bu aracı kullan",
+  "home_change_tool": "Başka bir araç seç",
+  "home_image_compress_title": "Görselleri sıkıştır"
 }

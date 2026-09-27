@@ -172,41 +172,45 @@ function formatBytes(bytes) {
 }
 
 function setupTabs() {
-  const tabs = document.querySelectorAll('button.tab-btn');
+  const tabs = document.querySelectorAll('.home-tool-card[data-tab]');
+  const selectTool = (target, selectedCard) => {
+    activeTab = target;
+    tabs.forEach(card => {
+      const selected = card === selectedCard;
+      card.classList.toggle('is-selected', selected);
+      if (selected) card.setAttribute('aria-current', 'page');
+      else card.removeAttribute('aria-current');
+    });
+
+    document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.add('hidden'));
+    document.getElementById(`panel-${target}`)?.classList.remove('hidden');
+  };
+
   tabs.forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (event) => {
       const target = btn.dataset.tab;
-      if (target === 'more') return;
+      if (!['compress', 'audio', 'gif'].includes(target)) return;
+      event.preventDefault();
 
-      activeTab = target;
-
-      tabs.forEach(b => {
-        b.classList.remove('active-tab');
-        b.classList.add('text-slate-400');
-      });
-
-      btn.classList.add('active-tab');
-      btn.classList.remove('text-slate-400');
-
-      // Show relevant option panels
-      document.querySelectorAll('.tab-panel').forEach(panel => {
-        panel.classList.add('hidden');
-      });
-      const activePanel = document.getElementById(`panel-${target}`);
-      if (activePanel) {
-        activePanel.classList.remove('hidden');
-      }
+      window.history.pushState({}, '', btn.href);
+      selectTool(target, btn);
+      requestAnimationFrame(() => document.getElementById('drop-zone')?.scrollIntoView({ behavior: 'smooth', block: 'center' }));
     });
   });
 
-  const requestedTool = new URLSearchParams(window.location.search).get('tool');
-  const requestedTab = requestedTool && document.querySelector(`.tab-btn[data-tab="${requestedTool}"]`);
-  if (requestedTab && requestedTool !== 'more') {
-    requestedTab.click();
-    if (window.location.hash === '#workspace') {
-      requestAnimationFrame(() => document.getElementById('workspace')?.scrollIntoView({ behavior: 'smooth' }));
+  const syncToolFromUrl = () => {
+    const requestedTool = new URLSearchParams(window.location.search).get('tool');
+    const requestedTab = Array.from(tabs).find(tab => tab.dataset.tab === requestedTool);
+    const selectedTab = requestedTab || Array.from(tabs).find(tab => tab.dataset.tab === 'compress');
+    if (!selectedTab) return;
+    selectTool(selectedTab.dataset.tab, selectedTab);
+    if (window.location.hash === '#drop-zone') {
+      requestAnimationFrame(() => document.getElementById('drop-zone')?.scrollIntoView({ behavior: 'smooth', block: 'center' }));
     }
-  }
+  };
+
+  syncToolFromUrl();
+  window.addEventListener('popstate', syncToolFromUrl);
 }
 
 function setupDragAndDrop() {

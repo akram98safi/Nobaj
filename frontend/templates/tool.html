@@ -54,7 +54,7 @@
       </section>
       <p class="text-sm text-slate-400 mt-8">{{ translations.tool_limit | replace('{size}', max_upload_size_mb|string) | replace('{duration}', max_duration_minutes|string) }}</p>
       <p class="text-sm text-slate-400 mt-2">{{ translations.tool_file_retention | replace('{ttl}', file_ttl_minutes|string) }}</p>
-      <a href="{{ language_path }}?tool={{ tool.operation }}#workspace" class="btn-violet inline-flex px-6 py-3 rounded-xl mt-8">{{ translations.tool_open_title }}</a>
+      <a href="{{ language_path }}?tool={{ tool.operation }}#drop-zone" class="btn-violet inline-flex px-6 py-3 rounded-xl mt-8">{{ translations.tool_open_title }}</a>
     </article>
     <nav class="flex flex-wrap gap-5 text-sm text-slate-400 mt-8" aria-label="{{ translations.footer_title }}">
       <a href="{{ '/ar' if language == 'ar' else '' }}/privacy">{{ translations.footer_privacy_link }}</a>

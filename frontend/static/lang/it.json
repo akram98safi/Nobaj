@@ -217,5 +217,8 @@
   "home_image_compress_desc": "Riduci le dimensioni delle immagini regolando la qualità.",
   "home_image_resize_desc": "Modifica le dimensioni mantenendo le proporzioni.",
   "home_image_convert_desc": "Converti tra JPG, PNG e WebP.",
-  "home_image_crop_desc": "Ritaglia liberamente o scegli un rapporto predefinito."
+  "home_image_crop_desc": "Ritaglia liberamente o scegli un rapporto predefinito.",
+  "home_select_tool": "Usa questo strumento",
+  "home_change_tool": "Scegli un altro strumento",
+  "home_image_compress_title": "Comprimi immagini"
 }

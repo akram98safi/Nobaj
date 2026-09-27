@@ -217,5 +217,8 @@
   "home_image_compress_desc": "قلّل حجم ملفات الصور مع التحكم بالجودة.",
   "home_image_resize_desc": "غيّر عرض الصورة وارتفاعها مع الحفاظ على تناسبها.",
   "home_image_convert_desc": "حوّل بين صيغ JPG وPNG وWebP.",
-  "home_image_crop_desc": "اقصص الصورة يدويًا أو اختر نسبة جاهزة."
+  "home_image_crop_desc": "اقصص الصورة يدويًا أو اختر نسبة جاهزة.",
+  "home_select_tool": "استخدم هذه الأداة",
+  "home_change_tool": "اختيار أداة أخرى",
+  "home_image_compress_title": "ضغط الصور"
 }

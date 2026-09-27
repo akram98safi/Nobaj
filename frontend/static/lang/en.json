@@ -217,5 +217,8 @@
   "home_image_compress_desc": "Reduce image file size with adjustable quality.",
   "home_image_resize_desc": "Change image dimensions and keep the proportions.",
   "home_image_convert_desc": "Convert between JPG, PNG and WebP.",
-  "home_image_crop_desc": "Crop freely or choose a preset aspect ratio."
+  "home_image_crop_desc": "Crop freely or choose a preset aspect ratio.",
+  "home_select_tool": "Use this tool",
+  "home_change_tool": "Choose another tool",
+  "home_image_compress_title": "Compress images"
 }

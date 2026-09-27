@@ -217,5 +217,8 @@
   "home_image_compress_desc": "गुणवत्ता नियंत्रित करके छवि का आकार घटाएँ।",
   "home_image_resize_desc": "आकार बदलें और अनुपात बनाए रखें।",
   "home_image_convert_desc": "JPG, PNG और WebP के बीच बदलें।",
-  "home_image_crop_desc": "मनचाहे तरीके से काटें या अनुपात चुनें।"
+  "home_image_crop_desc": "मनचाहे तरीके से काटें या अनुपात चुनें।",
+  "home_select_tool": "इस टूल का उपयोग करें",
+  "home_change_tool": "दूसरा टूल चुनें",
+  "home_image_compress_title": "छवियाँ संपीड़ित करें"
 }

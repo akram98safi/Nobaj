@@ -217,5 +217,8 @@
   "home_image_compress_desc": "품질을 조정해 이미지 파일 크기를 줄이세요.",
   "home_image_resize_desc": "이미지 크기를 바꾸고 비율을 유지하세요.",
   "home_image_convert_desc": "JPG, PNG, WebP 형식 간 변환하세요.",
-  "home_image_crop_desc": "자유롭게 자르거나 비율을 선택하세요."
+  "home_image_crop_desc": "자유롭게 자르거나 비율을 선택하세요.",
+  "home_select_tool": "이 도구 사용",
+  "home_change_tool": "다른 도구 선택",
+  "home_image_compress_title": "이미지 압축"
 }

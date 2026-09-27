@@ -217,5 +217,8 @@
   "home_image_compress_desc": "画質を調整して画像のファイルサイズを縮小します。",
   "home_image_resize_desc": "画像の幅と高さを変更し、縦横比を維持します。",
   "home_image_convert_desc": "JPG・PNG・WebP形式を相互変換します。",
-  "home_image_crop_desc": "自由に切り抜くか、決まった比率を選択します。"
+  "home_image_crop_desc": "自由に切り抜くか、決まった比率を選択します。",
+  "home_select_tool": "このツールを使う",
+  "home_change_tool": "別のツールを選ぶ",
+  "home_image_compress_title": "画像を圧縮"
 }
